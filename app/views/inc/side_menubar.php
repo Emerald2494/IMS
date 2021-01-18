@@ -60,13 +60,13 @@
             </li>
          
             <li id="brandNav">
-              <a href="#">
+              <a href="<?php echo URLROOT;?>/ProductMdl">
                 <i class="glyphicon glyphicon-tags"></i> <span>Models</span>
               </a>
             </li>
          
             <li id="categoryNav">
-              <a href="#">
+              <a href="<?php echo URLROOT;?>/categories">
                 <i class="fa fa-files-o"></i> <span>Category</span>
               </a>
             </li>

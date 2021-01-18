@@ -54,6 +54,9 @@
   <script>
     $.widget.bridge('uibutton', $.ui.button);
   </script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URLROOT;?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- Morris.js charts -->
@@ -96,7 +99,6 @@
   <!-- DataTables -->
 <script src="<?php echo URLROOT;?>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo URLROOT;?>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
 
 
 </head>

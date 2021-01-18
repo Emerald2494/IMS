@@ -26,7 +26,7 @@ class Database
             // print_r($this->pdo);
             // echo "Success";
         } catch (PDOException $e) {
-            $this->error = $e->getMessage();
+            // $this->error = $e->getMessage();
             echo $this->error;
         }
     }
@@ -60,5 +60,39 @@ class Database
             $row = $stmt->fetchAll();
             return ($success) ? $row : [];
         }
+
+        public function update($table,$id,$data)
+        {
+            if (isset($data['id'])){
+                unset($data['id']);
+            }
+            $columns = array_keys($data);
+            function map($item)
+            {
+                return $item . '=:' . $item;
+            }
+            $columns = array_map('map', $columns);
+            $bindingSql = implode(',', $columns);
+            $sql = 'UPDATE ' . $table . ' SET ' . $bindingSql . ' WHERE `id`=:id';
+            $stmt = $this->pdo->prepare($sql);
+            $data['id'] = $id;
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            $status = $stmt->execute();
+            return $status;
+
+
+        }
+
+    public function getById($table,$id)
+    {
+        $sql = 'SELECT * FROM ' . $table . ' WHERE `id`= :id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id',$id);
+        $success = $stmt->execute();
+        $row = $stmt->fetch();
+        return ($success) ? $row : [];
+    }
 
 }

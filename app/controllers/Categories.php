@@ -1,6 +1,6 @@
 <?php
 
-class Brands extends Controller
+class Categories extends Controller
 {
     private $db;
     public function __construct() {
@@ -12,18 +12,14 @@ class Brands extends Controller
     public function index()
     {
         // echo "hello brand";
-        $brands = $this->db->readAll('brands');
+        $categories = $this->db->readAll('categories');
        
         $data = [
-            'brands' => $brands,
+            'categories' => $categories,
         ];
         
-        $this->view('brands/index',$data);
+        $this->view('categories/index',$data);
         
-        
-        // $brands = $this->db->readAll('brands');
-        // $json = array('data' => $brands);
-        // echo json_encode($json);
     }
 
     public function store()
@@ -42,29 +38,24 @@ class Brands extends Controller
     }
 
     public function update(){
-    //    echo "Hello";
-    //    exit;
-    // $body = json_decode(file_get_contents('php://input'));
-    // print_r($body);
-    // exit;
+       echo "Hello";
+       exit;
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             $id = $_POST['id'];
-          
-            $name = $_POST['name'];
-            $active = $_POST['active'];
-        //    print_r($id);
-        //    print_r($name);
-        //    print_r($active);
-        //    exit;
+           print_r($id);
+           exit;
+            $name = $_POST['edit_brand_name'];
+            $active = $_POST['edit_active'];
+           
             $brand = new BrandsModel();
             $brand->setId($id);
             $brand->setName($name);
             $brand->setActive($active);
                        
-            $brandCreated = $this->db->update('brands',$brand->getId(),$brand->toArray());
+            $brandCreated = $this->db->update('brands',$id,$brand->toArray());
             
-            redirect('brands');
+            redirect('categories/');
         }else{
             echo 'try again';
         }

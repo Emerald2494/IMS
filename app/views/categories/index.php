@@ -8,11 +8,11 @@
   <section class="content-header">
     <h1>
       Manage
-      <small>Brands</small>
+      <small>Categories</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Brands</li>
+      <li class="active">Categories</li>
     </ol>
   </section>
 
@@ -23,20 +23,20 @@
       <div class="col-md-12 col-xs-12">
 
        
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addBrandModal"><i class="fa fa-plus"></i> Add Brand</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addBrandModal"><i class="fa fa-plus"></i> Add Category</button>
           <br /> <br />
        
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Manage Brands</h3>
+            <h3 class="box-title">Manage Categories</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Brand Name</th>
+                <th>Category Name</th>
                 <th>Status</th>
                 
                   <th>Action</th>
@@ -44,11 +44,11 @@
               </tr>
               </thead>
               <tbody>
-                <?php foreach($data['brands'] as $brand) { ?>
+                <?php foreach($data['categories'] as $category) { ?>
                     <tr>
                        
-                        <td><?php echo $brand['name']; ?> </td>
-                        <?php if($brand['active']==1) { ?>
+                        <td><?php echo $category['name']; ?> </td>
+                        <?php if($category['active']==1) { ?>
                         <td><span class="label label-success">Active</span></td>
                     <?php } else { ?>
                         <td><span class="label label-warning">Inactive</span></td>
@@ -57,9 +57,9 @@
                 
 
                         
-                        <td><button type="button" class="btn btn-default edit" value="<?php echo $brand['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-pencil"></i></button></td>
+                        <td><button type="button" class="btn btn-default edit" value="<?php echo $category['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $category['id']; ?>"><i class="fa fa-pencil"></i></button></td>
                             
-                        <td> <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-trash"></i></button></td>
+                        <td> <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $category['id']; ?>"><i class="fa fa-trash"></i></button></td>
                       
                         
                     </tr>
@@ -71,23 +71,21 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Edit Brand</h4>
+                          <h4 class="modal-title">Edit Category</h4>
                         </div>
 
-                        <form role="form" id="updateBrandForm">
+                        <form role="form" method="post" id="updateBrandForm">
 
                           <div class="modal-body">
                             <div id="messages"></div>
 
                             <div class="form-group">
-                              <label for="edit_brand_name">Brand Name</label>
-                              <input type="text" class="form-control" value="<?php echo $brand['name']; ?>" id="edit_brand_name<?php echo $brand['id']; ?>" name="name" placeholder="Enter brand name" autocomplete="off">
+                              <label for="edit_brand_name">Category Name</label>
+                              <input type="text" class="form-control" value="<?php echo $brand['name']; ?>" id="edit_brand_name<?php echo $brand['id']; ?>" name="edit_brand_name" placeholder="Enter category name" autocomplete="off">
                             </div>
                             <div class="form-group">
                               <label for="edit_active">Status</label>
-                              <select class="form-control" value="<?php echo $brand['active']; ?>" id="edit_active<?php echo $brand['id']; ?>" name="active">
-                                
-                              
+                              <select class="form-control" value="<?php echo $brand['active']; ?>" id="edit_active<?php echo $brand['id']; ?>" name="edit_active">
                                 <option value="1">Active</option>
                                 <option value="2">Inactive</option>
                               </select>
@@ -96,7 +94,7 @@
 
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary " id="update_brand" value="<?php echo $brand['id']; ?>">Save changes</button>
+                            <button type="submit" class="btn btn-primary update" value="<?php echo $brand['id']; ?>">Save changes</button>
                           </div>
 
                         </form>
@@ -194,7 +192,7 @@
 
 <script type="text/javascript">
 
-  $(document).on('click','#update_brand', function(){
+  $(document).on('click','.update', function(){
       $id = $(this).val();
       //  alert($id);
 
@@ -202,13 +200,10 @@
       $active = $('#edit_active' + $id).val();
    
      var form_url = '<?php echo URLROOT;?>/brands/update/' + $id;
-        //  alert(form_url);
-        //  alert($id);
-        //  alert($name);
-        //  alert($active);
+        // alert(form_url);
       $.ajax({
         
-        url:form_url,  
+        url:form_url ,  
         type: 'POST',
         data: {
            id : $id,
@@ -216,10 +211,7 @@
           active: $active,
         
         },
-      
-        // data : $('form').serialize(),
         success: function(){
-          // alert('OK');
           window.location.reload();
         }
       });
