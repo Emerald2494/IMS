@@ -50,7 +50,7 @@
                         <td><?php echo $category['name']; ?> </td>
                         <?php if($category['active']==1) { ?>
                         <td><span class="label label-success">Active</span></td>
-                    <?php } else { ?>
+                    <?php } elseif($category['active'] == 2) { ?>
                         <td><span class="label label-warning">Inactive</span></td>
                     <?php } ?>
 
