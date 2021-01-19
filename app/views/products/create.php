@@ -1,38 +1,148 @@
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
-<div class="wrapper ">
-  <?php require_once APPROOT .'/views/inc/sidebar.php'; ?>
-    <div class="main-panel" id="main-panel">
-    <?php require_once APPROOT .'/views/inc/navbar.php'; ?>
-      <div class="panel-header panel-header-lg">
-<div class="createForm"> 
-<form method="POST" action="<?php echo URLROOT;?>/expenses/store">
+<?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
+<?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
 
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Manage
+      <small>Products</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Products</li>
+    </ol>
+  </section>
 
-  <div class="form-group ">
-    <label for="exampleFormControlInput1">Amount</label>
-    <input type="number" class="form-control" name="amount" id="exampleFormControlInput1" placeholder="Enter Amount here">
-  </div>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
 
-  <div class="form-group ">
-    <label for="exampleFormControlInput1">Qty</label>
-    <input type="number" class="form-control" name="qty" id="exampleFormControlInput1" placeholder="Enter Qty here">
-  </div>
+        <!-- <div id="messages"></div> -->
 
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Category</label>
-    <select class="form-control" name="category" id="exampleFormControlSelect1">
-      <?php foreach ($data['categories'] as $category) { ?>
-          <option value="<?php echo $category['id']; ?>">
-              <?php echo $category['name']; ?>
-          </option>
-      <?php } ?>
-    </select>
-  </div>
-  
-  <div class="col-md-12 text-center"">
-    <button type="reset" class="btn btn-warning w-25">Reset</button>
-    <button type="submit" class="btn btn-info w-25">Submit</button>
-  </div>  
-</form>
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Add Product</h3>
+          </div>
+          <!-- /.box-header -->
+          <form role="form" action="">
+          <div class="box-body">
+
+                <div class="form-group">
+                  <label for="product_image">Image</label>
+                  <div class="kv-avatar">
+                      <div class="file">
+                          <input id="product_image" name="product_image" type="file">
+                      </div>
+                  </div>
+                </div>
+
+               <div class="form-group">
+                  <label for="product_name">Product name</label>
+                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" autocomplete="off"/>
+                </div>
+             
+
+                <div class="form-group">
+                  <label for="price">Price</label>
+                  <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" autocomplete="off" />
+                </div>
+
+                <div class="form-group">
+                  <label for="qty">Qty</label>
+                  <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Qty" autocomplete="off" />
+                </div>
+
+                <div class="form-group">
+                  <label for="store">Brand</label>
+                  <select class="form-control" id="availability" name="availability">
+                    <?php foreach ($data['brands'] as $brand) { ?>
+                    <?php if($brand['active']==1) { ?>
+                        <option value="<?php echo $brand['id']; ?>">
+                            <?php echo $brand['name']; ?>
+                        </option>
+                        <?php } ?>
+                      <?php } ?>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="store">Model</label>
+                  <select class="form-control" id="availability" name="availability">
+                    <?php foreach ($data['models'] as $model) { ?>
+                      <?php if($model['active']==1) { ?>
+                        <option value="<?php echo $model['id']; ?>">
+                            <?php echo $model['name']; ?>
+                        </option>
+                        <?php } ?>
+                      <?php } ?>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="store">Category</label>
+                  <select class="form-control" id="availability" name="availability">
+                      <?php foreach ($data['categories'] as $category) { ?>
+                        <?php if($category['active']==1) { ?>
+                      <option value="<?php echo $category['id']; ?>">
+                          <?php echo $category['name']; ?>
+                      </option>
+                      <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="store">Store</label>
+                  <select class="form-control" id="availability" name="availability">
+                  <?php foreach ($data['stores'] as $store) { ?>
+                    <?php if($store['active']==1) { ?>
+                      <option value="<?php echo $store['id']; ?>">
+                          <?php echo $store['name']; ?>
+                      </option>
+                    <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter 
+                  description" autocomplete="off">
+                  </textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="store">Availability</label>
+                  <select class="form-control" id="availability" name="availability">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                  </select>
+                </div>
+                
+          </div>  
+          <div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <a href="<?php echo URLROOT;?>/products/index" class="btn btn-warning">Back</a>
+          </div>      
+          </form>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- col-md-12 -->
+    </div>
+    <!-- /.row -->
+    
+
+  </section>
+  <!-- /.content -->
 </div>
+<!-- /.content-wrapper -->
+
+
 <?php require_once APPROOT .'/views/inc/footer.php'; ?>

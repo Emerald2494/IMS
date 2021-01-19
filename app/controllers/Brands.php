@@ -63,7 +63,7 @@ class Brands extends Controller
             $brand->setActive($active);
                        
             $brandCreated = $this->db->update('brands',$brand->getId(),$brand->toArray());
-            
+         
             redirect('brands');
         }else{
             echo 'try again';

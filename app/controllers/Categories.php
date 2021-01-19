@@ -39,12 +39,13 @@ class Categories extends Controller
 
     public function update(){
       
+       
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             $id = $_POST['id'];
             $name = $_POST['name'];
             $active = $_POST['active'];
-           
+        
             $categories = new CategoriesModel();
             $categories->setId($id);
             $categories->setName($name);

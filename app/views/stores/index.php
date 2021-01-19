@@ -8,11 +8,11 @@
   <section class="content-header">
     <h1>
       Manage
-      <small>Categories</small>
+      <small>Stores</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Categories</li>
+      <li class="active">Stores</li>
     </ol>
   </section>
 
@@ -23,20 +23,20 @@
       <div class="col-md-12 col-xs-12">
 
        
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><i class="fa fa-plus"></i> Add Category</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addStoreModal"><i class="fa fa-plus"></i> Add Store</button>
           <br /> <br />
        
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Manage Categories</h3>
+            <h3 class="box-title">Manage Stores</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Category Name</th>
+                <th>Store Name</th>
                 <th>Status</th>
                 
                   <th>Action</th>
@@ -44,52 +44,52 @@
               </tr>
               </thead>
               <tbody>
-                <?php foreach($data['categories'] as $category) { ?>
+                <?php foreach($data['stores'] as $store) { ?>
                     <tr>
                        
-                        <td><?php echo $category['name']; ?> </td>
-                        <?php if($category['active']==1) { ?>
+                        <td><?php echo $store['name']; ?> </td>
+                        <?php if($store['active']==1) { ?>
                         <td><span class="label label-success">Active</span></td>
                     <?php } else { ?>
                         <td><span class="label label-warning">Inactive</span></td>
-                    <?php } ?>
-
-                
+                    <?php } ?>       
 
                         
-                        <td><button type="button" class="btn btn-default edit" value="<?php echo $category['id']; ?>" data-toggle="modal" data-target="#editCategoryModal<?php echo $category['id']; ?>"><i class="fa fa-pencil"></i></button> |
+                        <td><button type="button" class="btn btn-default edit" value="<?php echo $store['id']; ?>" data-toggle="modal" data-target="#editStoreModal<?php echo $store['id']; ?>"><i class="fa fa-pencil"></i></button> |
                             
-                         <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeCategoryModal<?php echo $category['id']; ?>"><i class="fa fa-trash"></i></button></td>
+                        <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeStoreModal<?php echo $store['id']; ?>"><i class="fa fa-trash"></i></button></td>
                       
                         
                     </tr>
                   
-                  <!-- edit category modal -->
-                  <div class="modal fade" tabindex="-1" role="dialog" id="editCategoryModal<?php echo $category['id']; ?>">
+                  <!-- edit store modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="editStoreModal<?php echo $store['id']; ?>">
                   
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Edit Category</h4>
+                          <h4 class="modal-title">Edit Store</h4>
                         </div>
 
-                        <form role="form" method="post" id="updateBrandForm">
+                        <form role="form" id="updateStoreForm">
 
                           <div class="modal-body">
                             <div id="messages"></div>
 
                             <div class="form-group">
-                              <label for="edit_brand_name">Category Name</label>
-                              <input type="text" class="form-control" value="<?php echo $category['name']; ?>" id="edit_category_name<?php echo $category['id']; ?>" name="name" placeholder="Enter category name" autocomplete="off">
+                              <label for="edit_store_name">Store Name</label>
+                              <input type="text" class="form-control" value="<?php echo $store['name']; ?>" id="edit_store_name<?php echo $store['id']; ?>" name="name" placeholder="Enter store name" autocomplete="off">
                             </div>
                             <div class="form-group">
                               <label for="edit_active">Status</label>
-                              <select class="form-control" value="<?php echo $category['active']; ?>" id="edit_active<?php echo $category['id']; ?>" name="active">
-                              <option value="1" <?php if($category['active'] == 1) {
+                              <select class="form-control" value="<?php echo $store['active']; ?>" id="edit_active<?php echo $store['id']; ?>" name="active">
+                                
+                              
+                                <option value="1" <?php if($store['active'] == 1) {
                                                             echo " selected";
                                                             } ?>>Active</option>
-                                <option value="2" <?php if($category['active'] == 2) {
+                                <option value="2" <?php if($store['active'] == 2) {
                                                             echo " selected";
                                                             } ?>>Inactive</option>
                               </select>
@@ -98,7 +98,7 @@
 
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary update" value="<?php echo $category['id']; ?>" id="update_category">Save changes</button>
+                            <button type="submit" class="btn btn-primary " id="update_store" value="<?php echo $store['id']; ?>">Save changes</button>
                           </div>
 
                         </form>
@@ -109,14 +109,13 @@
                   </div><!-- /.modal -->
 
 
-
-                  <!-- remove brand modal -->
-                  <div class="modal fade" tabindex="-1" role="dialog" id="removeCategoryModal<?php echo $category['id']; ?>">
+                  <!-- remove store modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="removeStoreModal<?php echo $store['id']; ?>">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Remove Brand</h4>
+                          <h4 class="modal-title">Remove Store</h4>
                         </div>
 
                         <form role="form" action="#" method="post" id="removeBrandForm">
@@ -125,7 +124,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" value="<?php echo $category['id']; ?>" id="delete_category">Save changes</button>
+                            <button type="submit" class="btn btn-primary" value="<?php echo $store['id']; ?>" id="delete_store">Save changes</button>
                           </div>
                         </form>
 
@@ -154,22 +153,22 @@
 <!-- /.content-wrapper -->
 
 
-<!-- create brand modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
+<!-- create store modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="addStoreModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add Brand</h4>
+        <h4 class="modal-title">Add Store</h4>
       </div>
 
-      <form role="form" action="<?php echo URLROOT;?>/categories/store" method="post" id="createBrandForm">
+      <form role="form" action="<?php echo URLROOT;?>/stores/store" method="post" id="createStoreForm">
 
         <div class="modal-body">
 
           <div class="form-group">
-            <label for="brand_name">Brand Name</label>
-            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter category name" autocomplete="off">
+            <label for="store_name">Store Name</label>
+            <input type="text" class="form-control" id="store_name" name="store_name" placeholder="Enter store name" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="active">Status</label>
@@ -195,18 +194,24 @@
 
 
 
+
+
+<?php require_once APPROOT .'/views/inc/footer.php'; ?>
+
 <script type="text/javascript">
 
-  $(document).on('click','#update_category', function(){
+//update store
+  $(document).on('click','#update_store', function(){
       $id = $(this).val();
-      $name = $('#edit_category_name' + $id).val();
+      //  alert($id);
+
+      $name = $('#edit_store_name' + $id).val();
       $active = $('#edit_active' + $id).val();
-     
-     var form_url = '<?php echo URLROOT;?>/categories/update/' + $id;
-        // alert(form_url);
+   
+     var form_url = '<?php echo URLROOT;?>/stores/update/' + $id;
       $.ajax({
         
-        url:form_url ,  
+        url:form_url,  
         type: 'POST',
         data: {
            id : $id,
@@ -214,20 +219,23 @@
           active: $active,
         
         },
+      
+        // data : $('form').serialize(),
         success: function(){
+          // alert('OK');
           window.location.reload();
         }
       });
       
     });
 
-       
-//delete category
-  $(document).on('click','#delete_category', function(){
+    
+//delete store
+  $(document).on('click','#delete_store', function(){
       $id = $(this).val();
       // alert($id);
    
-      var del_url = '<?php echo URLROOT;?>/categories/removeCategory/' + $id;
+      var del_url = '<?php echo URLROOT;?>/stores/removeStore/' + $id;
           // alert(del_url);
         //  alert($id);
         //  alert($name);
@@ -246,6 +254,3 @@
     });
 
 </script>
-
-
-<?php require_once APPROOT .'/views/inc/footer.php'; ?>

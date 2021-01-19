@@ -67,27 +67,19 @@
          
             <li id="categoryNav">
               <a href="<?php echo URLROOT;?>/categories">
-                <i class="fa fa-files-o"></i> <span>Category</span>
+              <i class="fa fa-list-ul" aria-hidden="true"></i> <span>Category</span>
               </a>
             </li>
          
 
          
             <li id="storeNav">
-              <a href="#">
-                <i class="fa fa-files-o"></i> <span>Stores</span>
+              <a href="<?php echo URLROOT;?>/stores">
+              <i class="fa fa-university" aria-hidden="true"></i>
+ <span>Stores</span>
               </a>
             </li>
          
-
-          
-          <li id="attributeNav">
-            <a href="#">
-              <i class="fa fa-files-o"></i> <span>Attributes</span>
-            </a>
-          </li>
-         
-
           
             <li class="treeview" id="mainProductNav">
               <a href="#">
@@ -99,10 +91,10 @@
               </a>
               <ul class="treeview-menu">
                 
-                  <li id="addProductNav"><a href="#"><i class="fa fa-circle-o"></i> Add Product</a></li>
+                  <li id="addProductNav"><a href="<?php echo URLROOT;?>/products/create"><i class="fa fa-circle-o"></i> Add Product</a></li>
                 
                 
-                <li id="manageProductNav"><a href="#"><i class="fa fa-circle-o"></i> Manage Products</a></li>
+                <li id="manageProductNav"><a href="<?php echo URLROOT;?>/products"><i class="fa fa-circle-o"></i> Manage Products</a></li>
               
               </ul>
             </li>
@@ -135,10 +127,6 @@
               </a>
             </li>
         
-
-
-          
-            <li id="companyNav"><a href="<#"><i class="fa fa-files-o"></i> <span>Company</span></a></li>
         <!-- <li class="header">Settings</li> -->
 
       

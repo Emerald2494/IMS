@@ -209,10 +209,7 @@
       $active = $('#edit_active' + $id).val();
    
      var form_url = '<?php echo URLROOT;?>/brands/update/' + $id;
-        //  alert(form_url);
-        //  alert($id);
-        //  alert($name);
-        //  alert($active);
+   
       $.ajax({
         
         url:form_url,  

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2021 at 09:45 AM
+-- Generation Time: Jan 19, 2021 at 10:54 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.25
 
@@ -38,10 +38,9 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `active`) VALUES
-(17, 'Apple', 1),
-(18, 'Samsung', 2),
-(19, 'Huawei', 1),
-(20, '', 1);
+(21, 'Samsung', 1),
+(22, 'something', 2),
+(27, 'Apple', 1);
 
 -- --------------------------------------------------------
 
@@ -69,6 +68,15 @@ CREATE TABLE `categories` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `active` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `active`) VALUES
+(12, 'Camera', 2),
+(13, 'Laptop', 1),
+(14, 'Phone', 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +135,14 @@ CREATE TABLE `models` (
   `active` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `models`
+--
+
+INSERT INTO `models` (`id`, `name`, `active`) VALUES
+(1, 'Galaxy S21 Ultra', 1),
+(3, 'testModel', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +177,27 @@ CREATE TABLE `products` (
   `date_sold` date NOT NULL,
   `customer_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stores`
+--
+
+CREATE TABLE `stores` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `stores`
+--
+
+INSERT INTO `stores` (`id`, `name`, `active`) VALUES
+(10, 'store one', 1),
+(13, 'store two', 1),
+(15, 'n', 2);
 
 -- --------------------------------------------------------
 
@@ -244,6 +281,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `stores`
+--
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -263,7 +306,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `cash_order`
@@ -275,7 +318,7 @@ ALTER TABLE `cash_order`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `charge_order`
@@ -293,7 +336,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `models`
 --
 ALTER TABLE `models`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -306,6 +349,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stores`
+--
+ALTER TABLE `stores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
