@@ -52,14 +52,12 @@
                         <td><span class="label label-success">Active</span></td>
                     <?php } else { ?>
                         <td><span class="label label-warning">Inactive</span></td>
-                    <?php } ?>
-
-                
+                    <?php } ?>       
 
                         
-                        <td><button type="button" class="btn btn-default edit" value="<?php echo $brand['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-pencil"></i></button></td>
+                        <td><button type="button" class="btn btn-default edit" value="<?php echo $brand['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-pencil"></i></button> |
                             
-                        <td> <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-trash"></i></button></td>
+                        <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-trash"></i></button></td>
                       
                         
                     </tr>
@@ -88,8 +86,12 @@
                               <select class="form-control" value="<?php echo $brand['active']; ?>" id="edit_active<?php echo $brand['id']; ?>" name="active">
                                 
                               
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
+                                <option value="1" <?php if($brand['active'] == 1) {
+                                                            echo " selected";
+                                                            } ?>>Active</option>
+                                <option value="2" <?php if($brand['active'] == 2) {
+                                                            echo " selected";
+                                                            } ?>>Inactive</option>
                               </select>
                             </div>
                           </div>
@@ -106,6 +108,30 @@
                     </div><!-- /.modal-dialog -->
                   </div><!-- /.modal -->
 
+
+                  <!-- remove brand modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="removeBrandModal<?php echo $brand['id']; ?>">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Remove Brand</h4>
+                        </div>
+
+                        <form role="form" action="#" method="post" id="removeBrandForm">
+                          <div class="modal-body">
+                            <p>Do you really want to remove?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" value="<?php echo $brand['id']; ?>" id="delete_brand">Save changes</button>
+                          </div>
+                        </form>
+
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
 
                 <?php } ?>
             
@@ -168,32 +194,13 @@
 
 
 
-<!-- remove brand modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="removeBrandModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Remove Brand</h4>
-      </div>
-
-      <form role="form" action="#" method="post" id="removeBrandForm">
-        <div class="modal-body">
-          <p>Do you really want to remove?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
 
 
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<?php require_once APPROOT .'/views/inc/footer.php'; ?>
 
 <script type="text/javascript">
 
+//update brand
   $(document).on('click','#update_brand', function(){
       $id = $(this).val();
       //  alert($id);
@@ -226,7 +233,28 @@
       
     });
 
+    
+//delete brand
+  $(document).on('click','#delete_brand', function(){
+      $id = $(this).val();
+      // alert($id);
+   
+      var del_url = '<?php echo URLROOT;?>/brands/removeBrand/' + $id;
+          // alert(del_url);
+        //  alert($id);
+        //  alert($name);
+        //  alert($active);
+        $.ajax({
+            url: del_url,
+            type: 'DELETE',
+            error: function() {
+                alert('Something is wrong');
+            },
+            success: function(data) {                
+                window.location.reload();
+            }
+        });
+      
+    });
+
 </script>
-
-
-<?php require_once APPROOT .'/views/inc/footer.php'; ?>

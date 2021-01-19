@@ -71,12 +71,15 @@ class Brands extends Controller
         
     }
 
-    public function editBrand($id)
-	{
-        $brandbyid = $this->db->getById('brands',$id);
-        $json = array('data' => $brandbyid);
-        echo json_encode($json);
-	}
+    public function removeBrand($id)
+    {
+        $isDeleted = $this->db->delete('brands', $id);
+       
+        // setMessage('success',"Your imaginary file has been deleted.");
+        // redirect('brands');
+    }
+    
+    
 
    
 

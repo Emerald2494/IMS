@@ -5,8 +5,8 @@ class Categories extends Controller
     private $db;
     public function __construct() {
         $this->db = new Database();
-        $this->model('BrandsModel');
-        $this->data['page_title'] = 'Brand';
+        $this->model('CategoriesModel');
+        $this->data['page_title'] = 'Categories';
     }
     
     public function index()
@@ -26,48 +26,47 @@ class Categories extends Controller
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $name = $_POST['brand_name'];
+            $name = $_POST['category_name'];
             $active = $_POST['active'];
             
-            $brands = new BrandsModel();
-            $brands->setName($name);
-            $brands->setActive($active);
-            $expenses = $this->db->create('brands',$brands->toArray());
+            $categories = new categoriesModel();
+            $categories->setName($name);
+            $categories->setActive($active);
+            $allcategories = $this->db->create('categories',$categories->toArray());
         }
-          redirect('brands');
+          redirect('categories');
     }
 
     public function update(){
-       echo "Hello";
-       exit;
+      
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             $id = $_POST['id'];
-           print_r($id);
-           exit;
-            $name = $_POST['edit_brand_name'];
-            $active = $_POST['edit_active'];
+            $name = $_POST['name'];
+            $active = $_POST['active'];
            
-            $brand = new BrandsModel();
-            $brand->setId($id);
-            $brand->setName($name);
-            $brand->setActive($active);
+            $categories = new CategoriesModel();
+            $categories->setId($id);
+            $categories->setName($name);
+            $categories->setActive($active);
                        
-            $brandCreated = $this->db->update('brands',$id,$brand->toArray());
+            $categoriesUpdated = $this->db->update('categories',$categories->getId(),$categories->toArray());
             
-            redirect('categories/');
+            redirect('categories');
         }else{
             echo 'try again';
         }
         
     }
 
-    public function editBrand($id)
-	{
-        $brandbyid = $this->db->getById('brands',$id);
-        $json = array('data' => $brandbyid);
-        echo json_encode($json);
-	}
+    public function removeCategory($id)
+    {
+        $isDeleted = $this->db->delete('categories', $id);
+       
+        // setMessage('success',"Your imaginary file has been deleted.");
+        // redirect('brands');
+    }
+    
 
    
 

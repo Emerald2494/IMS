@@ -18,6 +18,10 @@ class ProductMdl extends Controller
         ];
         
         $this->view('productmodels/index',$data);
+
+        // $models = $this->db->readAll('models');
+        // $json = array('data' => $models);
+        // echo json_encode($json);
         
     }
 
@@ -36,6 +40,37 @@ class ProductMdl extends Controller
           redirect('ProductMdl');
     }
 
+    
+    public function update(){
+      
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                
+                $id = $_POST['id'];
+              
+                $name = $_POST['name'];
+                $active = $_POST['active'];
+             
+                $model = new ProductMdlModel();
+                $model->setId($id);
+                $model->setName($name);
+                $model->setActive($active);
+                           
+                $modelCreated = $this->db->update('models',$model->getId(),$model->toArray());
+                
+                redirect('ProductMdl');
+            }else{
+                echo 'try again';
+            }
+            
+        }
+    
+        public function removeModel($id)
+        {
+            $isDeleted = $this->db->delete('models', $id);
+           
+            // setMessage('success',"Your imaginary file has been deleted.");
+            // redirect('brands');
+        }
    
 
    

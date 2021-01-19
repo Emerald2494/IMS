@@ -23,7 +23,7 @@
       <div class="col-md-12 col-xs-12">
 
        
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addBrandModal"><i class="fa fa-plus"></i> Add Category</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><i class="fa fa-plus"></i> Add Category</button>
           <br /> <br />
        
 
@@ -57,15 +57,15 @@
                 
 
                         
-                        <td><button type="button" class="btn btn-default edit" value="<?php echo $category['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $category['id']; ?>"><i class="fa fa-pencil"></i></button></td>
+                        <td><button type="button" class="btn btn-default edit" value="<?php echo $category['id']; ?>" data-toggle="modal" data-target="#editCategoryModal<?php echo $category['id']; ?>"><i class="fa fa-pencil"></i></button> |
                             
-                        <td> <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $category['id']; ?>"><i class="fa fa-trash"></i></button></td>
+                         <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeCategoryModal<?php echo $category['id']; ?>"><i class="fa fa-trash"></i></button></td>
                       
                         
                     </tr>
                   
-                  <!-- edit brand modal -->
-                  <div class="modal fade" tabindex="-1" role="dialog" id="editBrandModal<?php echo $brand['id']; ?>">
+                  <!-- edit category modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="editCategoryModal<?php echo $category['id']; ?>">
                   
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -81,20 +81,24 @@
 
                             <div class="form-group">
                               <label for="edit_brand_name">Category Name</label>
-                              <input type="text" class="form-control" value="<?php echo $brand['name']; ?>" id="edit_brand_name<?php echo $brand['id']; ?>" name="edit_brand_name" placeholder="Enter category name" autocomplete="off">
+                              <input type="text" class="form-control" value="<?php echo $category['name']; ?>" id="edit_category_name<?php echo $category['id']; ?>" name="name" placeholder="Enter category name" autocomplete="off">
                             </div>
                             <div class="form-group">
                               <label for="edit_active">Status</label>
-                              <select class="form-control" value="<?php echo $brand['active']; ?>" id="edit_active<?php echo $brand['id']; ?>" name="edit_active">
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
+                              <select class="form-control" value="<?php echo $category['active']; ?>" id="edit_active<?php echo $category['id']; ?>" name="active">
+                              <option value="1" <?php if($category['active'] == 1) {
+                                                            echo " selected";
+                                                            } ?>>Active</option>
+                                <option value="2" <?php if($category['active'] == 2) {
+                                                            echo " selected";
+                                                            } ?>>Inactive</option>
                               </select>
                             </div>
                           </div>
 
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary update" value="<?php echo $brand['id']; ?>">Save changes</button>
+                            <button type="submit" class="btn btn-primary update" value="<?php echo $category['id']; ?>" id="update_category">Save changes</button>
                           </div>
 
                         </form>
@@ -104,6 +108,31 @@
                     </div><!-- /.modal-dialog -->
                   </div><!-- /.modal -->
 
+
+
+                  <!-- remove brand modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="removeCategoryModal<?php echo $category['id']; ?>">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Remove Brand</h4>
+                        </div>
+
+                        <form role="form" action="#" method="post" id="removeBrandForm">
+                          <div class="modal-body">
+                            <p>Do you really want to remove?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" value="<?php echo $category['id']; ?>" id="delete_category">Save changes</button>
+                          </div>
+                        </form>
+
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
 
                 <?php } ?>
             
@@ -126,7 +155,7 @@
 
 
 <!-- create brand modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="addBrandModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,13 +163,13 @@
         <h4 class="modal-title">Add Brand</h4>
       </div>
 
-      <form role="form" action="<?php echo URLROOT;?>/brands/store" method="post" id="createBrandForm">
+      <form role="form" action="<?php echo URLROOT;?>/categories/store" method="post" id="createBrandForm">
 
         <div class="modal-body">
 
           <div class="form-group">
             <label for="brand_name">Brand Name</label>
-            <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="Enter brand name" autocomplete="off">
+            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter category name" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="active">Status</label>
@@ -166,40 +195,16 @@
 
 
 
-<!-- remove brand modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="removeBrandModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Remove Brand</h4>
-      </div>
-
-      <form role="form" action="#" method="post" id="removeBrandForm">
-        <div class="modal-body">
-          <p>Do you really want to remove?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
-
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 <script type="text/javascript">
 
   $(document).on('click','.update', function(){
       $id = $(this).val();
       //  alert($id);
 
-      $name = $('#edit_brand_name' + $id).val();
-      $active = $('#edit_active' + $id).val();
+      $name = $('#name' + $id).val();
+      $active = $('#active' + $id).val();
    
-     var form_url = '<?php echo URLROOT;?>/brands/update/' + $id;
+     var form_url = '<?php echo URLROOT;?>/categories/update/' + $id;
         // alert(form_url);
       $.ajax({
         
@@ -215,6 +220,30 @@
           window.location.reload();
         }
       });
+      
+    });
+
+       
+//delete category
+  $(document).on('click','#delete_category', function(){
+      $id = $(this).val();
+      // alert($id);
+   
+      var del_url = '<?php echo URLROOT;?>/categories/removeCategory/' + $id;
+          // alert(del_url);
+        //  alert($id);
+        //  alert($name);
+        //  alert($active);
+        $.ajax({
+            url: del_url,
+            type: 'DELETE',
+            error: function() {
+                alert('Something is wrong');
+            },
+            success: function(data) {                
+                window.location.reload();
+            }
+        });
       
     });
 

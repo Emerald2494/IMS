@@ -95,4 +95,14 @@ class Database
         return ($success) ? $row : [];
     }
 
+    public function delete($table,$id)
+    {
+        $sql = 'DELETE FROM '. $table . ' WHERE `id`=:id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id',$id);
+        $success = $stmt->execute();
+        return $success;
+        
+    }
+
 }
