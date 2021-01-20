@@ -26,10 +26,10 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Add Product</h3>
+            <h3 class="box-title">Edit Product</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" method="POST" action="<?php echo URLROOT;?>/products/update">
+          <form role="form" method="POST" action="<?php echo URLROOT;?>/products/store">
           <div class="box-body">
 
                 <div class="form-group">

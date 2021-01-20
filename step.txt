@@ -1,0 +1,5 @@
+1. Admin Login
+2. Admin create user group 
+3 manage user
+4. All form validation 
+5. set message function 
