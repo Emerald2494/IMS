@@ -29,9 +29,9 @@
             <h3 class="box-title">Edit Product</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" method="POST" action="<?php echo URLROOT;?>/products/store">
+          <form role="form" method="POST" action="<?php echo URLROOT;?>/products/update">
+          <input type="hidden" name="product_id" value="<?php echo $data['products']['product_id']; ?>">
           <div class="box-body">
-
                 <div class="form-group">
                   <label for="product_image">Image</label>
                   <div class="kv-avatar">
@@ -43,7 +43,7 @@
 
                <div class="form-group">
                   <label for="product_name">Product name</label>
-                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" autocomplete="off"/>
+                  <input type="text" class="form-control" value="<?php echo $data['products']['name']; ?>" name="product_name" placeholder="Enter product name"/>
                 </div>
              
 
