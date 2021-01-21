@@ -24,8 +24,8 @@
             </a>
             <ul class="treeview-menu">
               
-              <li id="createUserNav"><a href="#"><i class="fa fa-circle-o"></i> Add User</a></li>
-              <li id="manageUserNav"><a href="#"><i class="fa fa-circle-o"></i> Manage Users</a></li>
+              <li id="createUserNav"><a href="<?php echo URLROOT;?>/users/create"><i class="fa fa-circle-o"></i> Add User</a></li>
+              <li id="manageUserNav"><a href="<?php echo URLROOT;?>/users/index"><i class="fa fa-circle-o"></i> Manage Users</a></li>
            
             </ul>
           </li>
@@ -42,10 +42,10 @@
               </a>
               <ul class="treeview-menu">
                 
-                  <li id="addGroupNav"><a href="#"><i class="fa fa-circle-o"></i> Add Group</a></li>
+                  <li id="addGroupNav"><a href="<?php echo URLROOT;?>/groups/create"><i class="fa fa-circle-o"></i> Add Group</a></li>
                
                 
-                <li id="manageGroupNav"><a href="#"><i class="fa fa-circle-o"></i> Manage Groups</a></li>
+                <li id="manageGroupNav"><a href="<?php echo URLROOT;?>/groups"><i class="fa fa-circle-o"></i> Manage Groups</a></li>
                
               </ul>
             </li>

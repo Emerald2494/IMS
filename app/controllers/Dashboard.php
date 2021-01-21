@@ -10,13 +10,13 @@ class Dashboard extends Controller
     
     public function index()
     {
+        $this->view('dashboard/login');
+    }
+    public function home()
+    {
         $this->view('dashboard/index');
     }
 
-     public function product()
-    {
-        $this->view('products/create');
-    }
 
    
 }

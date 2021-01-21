@@ -74,24 +74,27 @@ class Products extends Controller
             redirect('products');
         }
 
-        public function edit()
+        public function edit($id)
             {
-                $products = $this->db->readAll('vw_products');
-                $brands = $this->db->readAll('brands');
-                $models = $this->db->readAll('models');
-                $categories = $this->db->readAll('categories');
-                $stores = $this->db->readAll('stores');
-                
+                $brand = $this->db->readAll('brands');
+                $model = $this->db->readAll('models');
+                $category = $this->db->readAll('categories');
+                $store = $this->db->readAll('stores');
+
+                $product = $this->db->getProductById('products', $id);
+
                 $data = [
-                    "products" => $products,
-                    "brands" => $brands,
-                    "models" => $models,
-                    "categories" => $categories,
-                    "stores" => $stores,
+                    "products" => $product,
+                    "brands" => $brand,
+                    "models" => $model,
+                    "categories" => $category,
+                    "stores" => $store,
                     
                 ];
+                // print_r($data);
+                // exit;
 
-                $this->view('products/create',$data);
+                $this->view('products/edit',$data);
             }
             
         public function update(){
@@ -102,22 +105,39 @@ class Products extends Controller
         // exit;
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
-                $id = $_POST['id'];
+                $id = $_POST['product_id'];
             
-                $name = $_POST['name'];
-                $active = $_POST['active'];
-            //    print_r($id);
-            //    print_r($name);
-            //    print_r($active);
-            //    exit;
-                $brand = new BrandsModel();
-                $brand->setId($id);
-                $brand->setName($name);
-                $brand->setActive($active);
+                $img = $_POST['product_image'];
+                $name = $_POST['product_name'];
+                $price = $_POST['price'];
+                $qty = $_POST['qty'];
+                $date_received = $_POST['date_received'];
+                $brand_id = $_POST['brand'];
+                $model_id = $_POST['model'];
+                $category_id = $_POST['category'];
+                $store_id = $_POST['store'];
+                $description = $_POST['description'];
+                $availability = $_POST['availability'];
+                $date_sold = $_POST['date_sold'];
+                
+                $products = new ProductsModel();
+                $products -> setProductId($id);
+                $products -> setImg($img);
+                $products -> setName($name);
+                $products -> setPrice( $price);
+                $products -> setQty($qty);
+                $products -> setdateReceived($date_received);
+                $products -> setBrandId($brand_id);
+                $products -> setModelId($model_id);
+                $products -> setCategoryId($category_id);
+                $products -> setStoreId($store_id);
+                $products -> setDescription($description);
+                $products -> setAvailability($availability);
+                $products -> setDateSold($date_sold);
                         
-                $brandCreated = $this->db->update('brands',$brand->getId(),$brand->toArray());
-            
-                redirect('brands');
+                $productCreated = $this->db->productUpdate('products',$products->getProductId(),$products->toArray());
+               
+                redirect('products');
             }else{
                 echo 'try again';
             }
@@ -126,7 +146,7 @@ class Products extends Controller
 
         public function removeProducts($id)
         {
-            $isDeleted = $this->db->delete('brands', $id);
+            $isDeleted = $this->db->delete('products', $id);
         
             // setMessage('success',"Your imaginary file has been deleted.");
             // redirect('brands');
