@@ -55,8 +55,8 @@
                 <tbody>
                 <?php foreach($data['products'] as $product) { ?>
                     <tr>
-                       
                         <td><?php echo $product['name']; ?> </td>
+                        
                         <td><?php echo $product['description']; ?> </td>
                         <td><?php echo $product['date_received']; ?> </td>
                         

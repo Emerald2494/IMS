@@ -95,56 +95,56 @@ class Products extends Controller
 
                 $this->view('products/edit',$data);
             }
-            
+
         public function update(){
-        //    echo "Hello";
-        //    exit;
-        // $body = json_decode(file_get_contents('php://input'));
-        // print_r($body);
-        // exit;
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //    echo "Hello";
+            //    exit;
+            // $body = json_decode(file_get_contents('php://input'));
+            // print_r($body);
+            // exit;
+                if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $id =$_POST['product_id'];
+                    // print_r($id);
+                    // exit;
+                    $img = $_POST['product_image'];
+                    $name = $_POST['name'];
+                    $price = $_POST['price'];
+                    $qty = $_POST['qty'];
+                    $date_received = $_POST['date_received'];
+                    $brand_id = $_POST['brand'];
+                    $model_id = $_POST['model'];
+                    $category_id = $_POST['category'];
+                    $store_id = $_POST['store'];
+                    $description = $_POST['description'];
+                    $availability = $_POST['availability'];
+                    $date_sold = $_POST['date_sold'];
+                    // $customer_id = $_POST['customer'];
+                    
+                    $products = new ProductsModel();
+                    $products->setProductId($id);
+                    $products -> setImg($img);
+                    $products -> setName($name);
+                    $products -> setPrice( $price);
+                    $products -> setQty($qty);
+                    $products -> setdateReceived($date_received );
+                    $products -> setBrandId($brand_id);
+                    $products -> setModelId($model_id);
+                    $products -> setCategoryId($category_id );
+                    $products -> setStoreId($store_id);
+                    $products -> setDescription($description);
+                    $products -> setAvailability($availability);
+                    $products -> setDateSold($date_sold);
+                            
+                    $brandCreated = $this->db->productUpdate('products',$products->getProductId(),$products->toArray());
+                    // print_r($brandCreated);
+                    // exit;
                 
-                $id = $_POST['product_id'];
-            
-                $img = $_POST['product_image'];
-                $name = $_POST['product_name'];
-                // print_r($name);
-                // exit;
-                $price = $_POST['price'];
-                $qty = $_POST['qty'];
-                $date_received = $_POST['date_received'];
-                $brand_id = $_POST['brand'];
-                $model_id = $_POST['model'];
-                $category_id = $_POST['category'];
-                $store_id = $_POST['store'];
-                $description = $_POST['description'];
-                $availability = $_POST['availability'];
-                $date_sold = $_POST['date_sold'];
+                    redirect('products');
+                }else{
+                    echo 'try again';
+                }
                 
-                $products = new ProductsModel();
-                
-                $products -> setProductId($id);
-                $products -> setImg($img);
-                $products -> setName($name);
-                $products -> setPrice( $price);
-                $products -> setQty($qty);
-                $products -> setdateReceived($date_received);
-                $products -> setBrandId($brand_id);
-                $products -> setModelId($model_id);
-                $products -> setCategoryId($category_id);
-                $products -> setStoreId($store_id);
-                $products -> setDescription($description);
-                $products -> setAvailability($availability);
-                $products -> setDateSold($date_sold);
-                        
-                $productCreated = $this->db->productUpdate('products',$products->getProductId(),$products->toArray());
-            
-                redirect('products');
-            }else{
-                echo 'try again';
             }
-            
-        }
 
         public function removeProducts($id)
         {
