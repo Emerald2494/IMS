@@ -55,8 +55,8 @@
                 <tbody>
                 <?php foreach($data['products'] as $product) { ?>
                     <tr>
-                       
                         <td><?php echo $product['name']; ?> </td>
+                        
                         <td><?php echo $product['description']; ?> </td>
                         <td><?php echo $product['date_received']; ?> </td>
                         
@@ -76,9 +76,9 @@
                     <?php } ?>       
 
                         
-                        <td><a href="<?php echo URLROOT;?>/products/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit" value="<?php echo $store['id']; ?>" ><i class="fa fa-pencil"></i></a> |
+                        <td><a href="<?php echo URLROOT;?>/products/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit"><i class="fa fa-pencil"></i></a> |
                             
-                        <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeStoreModal<?php echo $store['id']; ?>"><i class="fa fa-trash"></i></button></td>
+                        <a href="<?php echo URLROOT; ?>/products/removeProducts/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default" ><i class="fa fa-trash"></i></a></td>
                       
                         
                     </tr>

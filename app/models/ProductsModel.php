@@ -134,14 +134,14 @@ class ProductsModel
         return $this->date_sold;
     }
 
-    public function setCustomerId($customer_id)
-    {
-        $this->customer_id = $customer_id;
-    }
-    public function getCustomerId()
-    {
-        return $this->customer_id;
-    }
+    // public function setCustomerId($customer_id)
+    // {
+    //     $this->customer_id = $customer_id;
+    // }
+    // public function getCustomerId()
+    // {
+    //     return $this->customer_id;
+    // }
 
     public function toArray()
     {
@@ -159,7 +159,6 @@ class ProductsModel
             "description" => $this->getDescription(),
             "availability" => $this->getAvailability(),
             "date_sold" => $this->getDateSold(),
-            "customer_id" => $this->getCustomerId(),
             
         ];
     }

@@ -82,7 +82,29 @@ class Database
             $status = $stmt->execute();
             return $status;
 
+        }
 
+        public function productUpdate($table,$id,$data)
+        {
+            if (isset($data['product_id'])){
+                unset($data['product_id']);
+            }
+            $columns = array_keys($data);
+            function map($item)
+            {
+                return $item . '=:' . $item;
+            }
+            $columns = array_map('map', $columns);
+            $bindingSql = implode(',', $columns);
+            $sql = 'UPDATE ' . $table . ' SET ' . $bindingSql . ' WHERE `product_id`=:product_id';
+            $stmt = $this->pdo->prepare($sql);
+            $data['product_id'] = $id;
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            $status = $stmt->execute();
+            return $status;
+            
         }
 
     public function getById($table,$id)
@@ -105,6 +127,7 @@ class Database
         return ($success) ? $row : [];
     }
 
+<<<<<<< HEAD
     public function productUpdate($table,$id,$data)
     {
         if (isset($data['product_id'])){
@@ -127,14 +150,24 @@ class Database
         return $status;
         
     }
+=======
+    public function deleteProduct($table,$id)
+    {
+        $sql = 'DELETE FROM '. $table . ' WHERE `product_id`=:product_id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':product_id',$id);
+        $success = $stmt->execute();
+        return $success;  
+    }
+
+>>>>>>> 543ca2ffdcac109434deb67622d936b6ca536e13
     public function delete($table,$id)
     {
         $sql = 'DELETE FROM '. $table . ' WHERE `id`=:id';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id',$id);
         $success = $stmt->execute();
-        return $success;
-        
+        return $success;  
     }
 
     public function loginCheck($table, $column1, $value1,$column2, $value2) 
