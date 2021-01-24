@@ -37,8 +37,10 @@ class Brands extends Controller
             $brands->setName($name);
             $brands->setActive($active);
             $expenses = $this->db->create('brands',$brands->toArray());
+            setMessage('success','Added new brand');
+            redirect('brands');
         }
-          redirect('brands');
+         
     }
 
     public function update(){

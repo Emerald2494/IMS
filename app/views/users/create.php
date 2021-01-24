@@ -61,18 +61,14 @@
                   <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" autocomplete="off">
                 </div>
 
-                <div class="form-group">
-                  <label for="fname">First name</label>
-                  <input type="text" class="form-control" id="fname" name="fname" placeholder="First name" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                  <label for="lname">Last name</label>
-                  <input type="text" class="form-control" id="lname" name="lname" placeholder="Last name" autocomplete="off">
-                </div>
 
                 <div class="form-group">
                   <label for="phone">Phone</label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Address</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" autocomplete="off">
                 </div>
 

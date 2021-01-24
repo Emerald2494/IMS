@@ -31,10 +31,7 @@
           <form role="form" method="POST" action="<?php echo URLROOT;?>/products/update">
           <input type="hidden" name="product_id" value="<?php echo $data['products']['product_id']; ?>">
           <div class="box-body">
-<<<<<<< HEAD
-=======
-         
->>>>>>> 543ca2ffdcac109434deb67622d936b6ca536e13
+
                 <div class="form-group">
                   <label for="product_image">Image</label>
                   <div class="kv-avatar">
@@ -46,11 +43,10 @@
                 
                <div class="form-group">
                   <label for="product_name">Product name</label>
-<<<<<<< HEAD
+
                   <input type="text" class="form-control" value="<?php echo $data['products']['name']; ?>" name="product_name" placeholder="Enter product name"/>
-=======
-                  <input type="text" class="form-control" value="<?php echo $data['products']['name'];?>" id="product_name" name="name" placeholder="Enter product name" autocomplete="off"/>
->>>>>>> 543ca2ffdcac109434deb67622d936b6ca536e13
+                  
+
                 </div>
              
                 

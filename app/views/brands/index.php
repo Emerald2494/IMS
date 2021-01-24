@@ -2,6 +2,7 @@
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
+<?php session_start(); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -54,7 +55,7 @@
                         <td><span class="label label-warning">Inactive</span></td>
                     <?php } ?>       
 
-                        
+                      
                         <td><button type="button" class="btn btn-default edit" value="<?php echo $brand['id']; ?>" data-toggle="modal" data-target="#editBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-pencil"></i></button> |
                             
                         <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#removeBrandModal<?php echo $brand['id']; ?>"><i class="fa fa-trash"></i></button></td>
@@ -97,6 +98,7 @@
                           </div>
 
                           <div class="modal-footer">
+                          
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary " id="update_brand" value="<?php echo $brand['id']; ?>">Save changes</button>
                           </div>

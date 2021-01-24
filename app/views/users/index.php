@@ -25,7 +25,7 @@
         <div class="col-md-12 col-xs-12">
 
           
-            <a href="#" class="btn btn-primary">Add User</a>
+            <a href="<?php echo URLROOT;?>/users/create" class="btn btn-primary">Add User</a>
             <br /> <br />
         
 

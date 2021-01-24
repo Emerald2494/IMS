@@ -112,9 +112,9 @@
               </a>
               <ul class="treeview-menu">
                 
-                  <li id="addOrderNav"><a href="#"><i class="fa fa-circle-o"></i> Add Order</a></li>
+                  <li id="addOrderNav"><a href="<?php echo URLROOT;?>/orders/create"><i class="fa fa-circle-o"></i> Add Order</a></li>
                
-                <li id="manageOrdersNav"><a href="#"><i class="fa fa-circle-o"></i> Manage Orders</a></li>
+                <li id="manageOrdersNav"><a href="<?php echo URLROOT;?>/orders/index"><i class="fa fa-circle-o"></i> Manage Orders</a></li>
                 
               </ul>
             </li>

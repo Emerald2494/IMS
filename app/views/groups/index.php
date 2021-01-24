@@ -49,7 +49,7 @@
                        <td>Staff</td>
                         <td>
                           
-                          <a href="#" class="btn btn-default"><i class="fa fa-edit"></i></a>  
+                          <a href="<?php echo URLROOT;?>/groups/edit" class="btn btn-default"><i class="fa fa-edit"></i></a>  
                          
                           
                           <a href="#" class="btn btn-default"><i class="fa fa-trash"></i></a>

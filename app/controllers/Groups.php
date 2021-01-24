@@ -17,6 +17,11 @@ class Groups extends Controller
         $this->view('groups/create');
     }
 
+    public function edit()
+    {
+        $this->view('groups/edit');
+    }
+
 
    
 }
