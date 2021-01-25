@@ -68,8 +68,11 @@ class Products extends Controller
                 $products -> setAvailability($availability);
                 $products -> setDateSold($date_sold);
                 $productCreated = $this->db->create('products',$products->toArray());
+                setMessage('success','Added new product');
+                redirect('products');
             }
-            redirect('products');
+            
+            
         }
 
         public function edit($id)

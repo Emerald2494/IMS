@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
 
-       
+      <?php require APPROOT.'/views/components/auth_message.php'; ?>
           <button class="btn btn-primary" data-toggle="modal" data-target="#addmodelModal"><i class="fa fa-plus"></i> Add Model</button>
           <br /> <br />
        
@@ -228,13 +228,11 @@
 //delete model
   $(document).on('click','#delete_model', function(){
       $id = $(this).val();
-      alert($id);
+     
    
       var del_url = '<?php echo URLROOT;?>/productmdl/removeModel/' + $id;
-          alert(del_url);
-        //  alert($id);
-        //  alert($name);
-        //  alert($active);
+         
+      
         $.ajax({
             url: del_url,
             type: 'DELETE',

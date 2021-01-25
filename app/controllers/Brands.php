@@ -65,7 +65,7 @@ class Brands extends Controller
             $brand->setActive($active);
                        
             $brandCreated = $this->db->update('brands',$brand->getId(),$brand->toArray());
-         
+            setMessage('success','Successfully updated');
             redirect('brands');
         }else{
             echo 'try again';
@@ -77,8 +77,8 @@ class Brands extends Controller
     {
         $isDeleted = $this->db->delete('brands', $id);
        
-        // setMessage('success',"Your imaginary file has been deleted.");
-        // redirect('brands');
+        setMessage('error','Successfully deleted');
+        redirect('brands');
     }
     
     

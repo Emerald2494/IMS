@@ -17,6 +17,14 @@ class Dashboard extends Controller
         $this->view('dashboard/index');
     }
 
+    public function register()
+    {
+        $this->view('dashboard/register');
+    }
 
+    public function login()
+    {
+        $this->view('dashboard/login');
+    }
    
 }

@@ -36,8 +36,10 @@ class ProductMdl extends Controller
             $models->setName($name);
             $models->setActive($active);
             $expenses = $this->db->create('models',$models->toArray());
+            setMessage('success','Added new model');
+            redirect('ProductMdl');
         }
-          redirect('ProductMdl');
+          
     }
 
     

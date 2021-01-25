@@ -11,8 +11,8 @@ class Auth extends Controller
         $this->db = new Database;
 
     }
-
     
+
     public function login_success()
     {
         // echo "Login Success!";

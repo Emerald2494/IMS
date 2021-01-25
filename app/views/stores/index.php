@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
 
-       
+      <?php require APPROOT.'/views/components/auth_message.php'; ?>
           <button class="btn btn-primary" data-toggle="modal" data-target="#addStoreModal"><i class="fa fa-plus"></i> Add Store</button>
           <br /> <br />
        

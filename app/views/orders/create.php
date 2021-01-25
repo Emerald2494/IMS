@@ -185,7 +185,7 @@ $('#add_row').unbind('click').bind('click', function() {
             dataType: 'json',
             success:function(response) {
             
-                // console.log(reponse.x);
+                //  console.log(response);
                 var html = '<tr id="row_'+row_id+'">'+
                     '<td>'+ 
                     '<select class="form-control select_group product" data-row-id="'+row_id+'" id="product_'+row_id+'" name="product[]" style="width:100%;" onchange="getProductData('+row_id+')">'+

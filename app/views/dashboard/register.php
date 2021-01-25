@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Log in</title>
+  <title>Register</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -33,11 +33,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Login</b></a>
+    <a href="#"><b>Create Account</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Create your account. It's free and only takes a minute.</p>
 
     
 
@@ -46,6 +46,11 @@
     } ?>
 
     <form action="<?php echo URLROOT; ?>/auth/login_success" method="post">
+    <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="name" id="name" placeholder="Username" autocomplete="off">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" id="email" placeholder="Email" autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -54,27 +59,31 @@
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback">
+        <textarea name="address" class="form-control" id="address" placeholder="Address"></textarea>
+        <span class="glyphicon glyphicon-list-alt form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Contact Number" autocomplete="off">
+        <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
+      </div>
       <div class="row">
         <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
+         
         </div>
         <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div class="col-xs-12 ">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign Up</button>
         </div>
         <!-- /.col -->
       </div>
       
-      <div class="p-t-100">
-						<a class="txt2" href="<?php echo URLROOT; ?>/dashboard/register">
-							Create your Account
+      <div class="pt-100">
+      already have an account?<a class="txt2" href="<?php echo URLROOT; ?>/dashboard/login">
+							Login
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
-					</div>
+      </div>
     </form>
 
   </div>

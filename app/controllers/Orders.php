@@ -61,8 +61,8 @@ class Orders extends Controller
     {
         $isDeleted = $this->db->delete('orders', $id);
        
-        // setMessage('success',"Your imaginary file has been deleted.");
-        // redirect('brands');
+         setMessage('success',"Successfully deleted.");
+         redirect('orders');
     }
     
     

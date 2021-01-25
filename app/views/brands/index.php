@@ -1,8 +1,8 @@
-
+<?php session_start(); ?>
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
-<?php session_start(); ?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
 
-       
+      <?php require APPROOT.'/views/components/auth_message.php'; ?>
           <button class="btn btn-primary" data-toggle="modal" data-target="#addBrandModal"><i class="fa fa-plus"></i> Add Brand</button>
           <br /> <br />
        

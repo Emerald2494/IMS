@@ -33,8 +33,10 @@ class Categories extends Controller
             $categories->setName($name);
             $categories->setActive($active);
             $allcategories = $this->db->create('categories',$categories->toArray());
+            setMessage('success','Added new category');
+            redirect('categories');
         }
-          redirect('categories');
+          
     }
 
     public function update(){

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>
@@ -21,7 +22,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
 
-       
+      <?php require APPROOT.'/views/components/auth_message.php'; ?>
           <a href="<?php echo URLROOT;?>/products/create" class="btn btn-primary"> Add Product</a>
           <br /> <br />
        
@@ -41,9 +42,7 @@
                   <th>Date Received</th>
                   <th>Price</th>
                   <th>Qty</th>
-                  <th>Brand</th>
-                  <th>Model</th>
-                  <th>Category</th>
+                  
                   <th>Store</th>
                   <th>Date Sold</th>
                 
@@ -62,10 +61,6 @@
                         
                         <td><?php echo $product['price']; ?> </td>
                         <td><?php echo $product['qty']; ?> </td>
-                        
-                        <td><?php echo $product['brand_name']; ?> </td>
-                        <td><?php echo $product['model_name']; ?> </td>
-                        <td><?php echo $product['category_name']; ?> </td>
                         <td><?php echo $product['store_name']; ?> </td>
                         <td><?php echo $product['date_sold']; ?> </td>
                        
