@@ -10,6 +10,7 @@ class OrdersModel
     private $net_amount;
     private $date_order;
     private $or_number;
+    private $user_id;
 
 
     public function setId($id)
@@ -84,6 +85,14 @@ class OrdersModel
     {
         return $this->or_number;
     }
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
 
 
     public function toArray()
@@ -97,7 +106,7 @@ class OrdersModel
             "net_amount" => $this->getNetAmount(),
             "date_order" => $this->getDateOrder(),
             "or_number" => $this->getOrNumber(),
-         
+            "user_id" => $this->getUserId(),
         ];
     }
 }

@@ -36,15 +36,13 @@
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Customer Name</th>
-                <th>Customer Address</th>
-                <th>Customer Contact_Number</th>
+                
                 <th>OR Number</th>
-                <th>Invoice Number</th>
-                <th>Date</th>
-                <th>Gross Amount</th>
-                <th>Vat Charge</th>
-                <th>Net Amount</th>
+                <th>Product Name</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Discount % </th>
+                <th>Amount</th>
                 
                   <th>Action</th>
               </tr>
@@ -52,20 +50,18 @@
               <tbody>
                 <?php foreach($data['orders'] as $order) { ?>
                     <tr>
-                        <td><?php echo $order['user_name']; ?> </td>
-                        <td><?php echo $order['user_address']; ?> </td>
-                        <td><?php echo $order['user_contact_number'];?></td>
                         <td><?php echo $order['or_number']; ?> </td>
-                        <td><?php echo $order['invoice_number']; ?> </td>
-                        <td><?php echo $order['date_order']; ?> </td>
-                        <td><?php echo $order['gross_amount']; ?> </td>
-                        <td><?php echo $order['vat_charge'];?></td>
-                        <td><?php echo $order['net_amount']; ?> </td>
+                        <td><?php echo $order['product_name']; ?> </td>
+                        <td><?php echo $order['qty']; ?> </td>
+                        <td><?php echo $order['rate']; ?> </td>
+                        <td><?php echo $order['discount']; ?> </td>
+                        <td><?php echo $order['amount'];?></td>
+                    
                      
                        
-                        <td><a href="<?php echo URLROOT;?>/orders/viewOrderLines/<?php echo $order['id']; ?>" type="button" class="btn btn-default" > <i class="fa fa-eye" aria-hidden="true"></i></a> | <a href="<?php echo URLROOT;?>/orders/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit"><i class="fa fa-pencil"></i></a> |
+                        <td><a href="<?php echo URLROOT;?>/orders/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit"><i class="fa fa-pencil"></i></a> |
                             
-                        <a href="<?php echo URLROOT;?>/orders/removeOrders/<?php echo $order['id']; ?>" type="button" class="btn btn-default" ><i class="fa fa-trash"></i></a></td>
+                        <a href="<?php echo URLROOT; ?>/products/removeProducts/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default" ><i class="fa fa-trash"></i></a></td>
                       
                         
                     </tr>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require_once APPROOT .'/views/inc/header.php'; ?>
 <?php require_once APPROOT .'/views/inc/header_menu.php'; ?>
 <?php require_once APPROOT .'/views/inc/side_menubar.php'; ?>

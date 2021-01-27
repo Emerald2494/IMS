@@ -14,8 +14,12 @@ class Orders extends Controller
     
     public function index()
     {
+        $orders = $this->db->readAll('vw_orders');
         
-        $this->view('orders/index');   
+        $data = [
+            "orders" =>$orders,
+        ];
+        $this->view('orders/index',$data);   
 
     }
 
@@ -39,12 +43,13 @@ class Orders extends Controller
             //for order store
             $or_no = 'OR -'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
             $inv_no = 'INV/'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+            session_start();
+            $user_id = base64_decode($_SESSION['id']);
             $gross_amount = $_POST['gross_amount_value'];
             $vat_charge_rate = $_POST['service_charge_rate'];
             $vat_charge = $_POST['vat_charge_value'];
             $net_amount = $_POST['net_amount_value'];
             $date_order = date('Y-m-d');    
-           
            
            
             $orders = new OrdersModel();
@@ -55,9 +60,10 @@ class Orders extends Controller
             $orders->setVatCharge($vat_charge);
             $orders->setNetAmount($net_amount);
             $orders->setDateOrder($date_order);
-          
+            $orders->setUserId($user_id);
             $orderCreated = $this->db->create('orders',$orders->toArray());
-            $order_id = '11';
+           
+            $order_id = $orderCreated;
             $products = $_POST['product'];
             $count_product = count($products);
             
@@ -73,23 +79,10 @@ class Orders extends Controller
                 // print_r($items);
                 
                  $isOrderDetailsCreated = $this->db->create('order_lines',$items);
-                    
+                redirect('orders');
                 
             }
             
-            // print_r($order_id);
-            
-            // redirect('orders');
-            
-            // $or_no = 'OR -'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
-            // $inv_no = 'INV/'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
-            // $data = array(
-            //     'or_no' => $or_no,
-            //     'inv_no' => $inv_no,
-            //     'product_id' =>$_POST('product'),
-            // );
-            // print_r($data);
-            // $orderCreated = $this->db->create('orders',$data);
             
         }
           
@@ -119,5 +112,17 @@ class Orders extends Controller
 		echo json_encode($products);
 	}
 
+    public function viewOrderLines($id)
+    {
+        
+        $orders= $this->db->readAll('vw_orderlines');
+        $orderlines = $this->db->getOrderById('order_lines',$id);
+        $data = [
+            "orders" => $orders,
+            "orderlines" =>$orderlines,
+        ];
+        $this->view('orders/viewOrderLines',$data);  
+        
+    }
   
 }

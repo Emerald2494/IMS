@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2021 at 06:13 AM
+-- Generation Time: Jan 27, 2021 at 10:43 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.25
 
@@ -174,13 +174,13 @@ INSERT INTO `models` (`id`, `name`, `active`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(25) NOT NULL,
-  `invoice_number` int(25) NOT NULL,
+  `invoice_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `gross_amount` int(50) NOT NULL,
   `vat_charge_rate` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `vat_charge` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `net_amount` int(11) NOT NULL,
   `date_order` date NOT NULL,
-  `or_number` int(11) NOT NULL,
+  `or_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -189,20 +189,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `invoice_number`, `gross_amount`, `vat_charge_rate`, `vat_charge`, `net_amount`, `date_order`, `or_number`, `user_id`) VALUES
-(7, 0, 945000, '', '8500', 144500, '2021-01-27', 0, 0),
-(8, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
-(9, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
-(10, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
-(11, 0, 1978000, '', '80900', 1698900, '2021-01-27', 0, 0),
-(12, 0, 2043000, '', '80900', 1698900, '2021-01-27', 0, 0),
-(13, 0, 1659000, '', '50000', 900000, '2021-01-27', 0, 0),
-(14, 0, 1506000, '', '17000', 289000, '2021-01-27', 0, 0),
-(15, 0, 425000, '', '25000', 450000, '2021-01-27', 0, 0),
-(16, 0, 425000, '', '25000', 450000, '2021-01-27', 0, 0),
-(17, 0, 605000, '', '10000', 190000, '2021-01-27', 0, 0),
-(18, 0, 452000, '', '17000', 289000, '2021-01-27', 0, 0),
-(19, 0, 724000, '', '34000', 578000, '2021-01-27', 0, 0),
-(20, 0, 1506000, '', '17000', 289000, '2021-01-27', 0, 0);
+(22, '0', 1081000, '', '17000', 289000, '2021-01-27', '0', 0),
+(23, 'INV/3B70', 676000, '', '8500', 144500, '2021-01-27', 'OR -6747', 0),
+(24, 'INV/7F9E', 180000, '', '10000', 190000, '2021-01-27', 'OR -FFD5', 1),
+(25, 'INV/E226', 561000, '', '8500', 144500, '2021-01-27', 'OR -DCF2', 2);
 
 -- --------------------------------------------------------
 
@@ -225,11 +215,13 @@ CREATE TABLE `order_lines` (
 --
 
 INSERT INTO `order_lines` (`id`, `order_id`, `product_id`, `qty`, `rate`, `discount`, `amount`) VALUES
-(7, 10, 4, '1', '809000', '0', '809000.00'),
-(8, 11, 7, '2', '809000', '0', '1618000.00'),
-(9, 11, 3, '1', '500000', '15', '425000.00'),
-(10, 11, 5, '1', '809000', '0', '809000.00'),
-(11, 11, 4, '-28', '170000', '20', '272000.00');
+(12, 22, 5, '1', '809000', '0', '809000.00'),
+(13, 22, 4, '2', '170000', '20', '272000.00'),
+(14, 23, 7, '3', '200000', '10', '540000.00'),
+(15, 23, 4, '1', '170000', '20', '136000.00'),
+(16, 24, 7, '1', '200000', '10', '180000.00'),
+(17, 25, 3, '1', '500000', '15', '425000.00'),
+(18, 25, 4, '1', '170000', '20', '136000.00');
 
 -- --------------------------------------------------------
 
@@ -320,7 +312,34 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `contact_number`) VALUES
-(1, 'Admin', 'admin@gmail.com', 'password', 'Yangon', '09-6961474912');
+(1, 'Admin', 'admin@gmail.com', 'password', 'Yangon', '09-6961474912'),
+(2, 'Emerald', 'emerald@gmail.com', 'TXlhMTIzIUAj', 'Pyawbwe', '09954861489');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_orderlines`
+-- (See below for the actual view)
+--
+CREATE TABLE `vw_orderlines` (
+`id` int(11)
+,`order_id` int(11)
+,`qty` varchar(255)
+,`rate` varchar(255)
+,`discount` varchar(255)
+,`amount` varchar(255)
+,`inv_no` varchar(255)
+,`gross_amt` int(50)
+,`vat_rate` varchar(255)
+,`Vat` varchar(255)
+,`net_amt` int(11)
+,`date_order` date
+,`or_number` varchar(255)
+,`product_name` varchar(255)
+,`selling_price` int(25)
+,`discount_price` int(25)
+,`purchased_price` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -330,13 +349,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `contact_numb
 --
 CREATE TABLE `vw_orders` (
 `id` int(25)
-,`invoice_number` int(25)
+,`invoice_number` varchar(255)
 ,`gross_amount` int(50)
 ,`vat_charge_rate` varchar(255)
 ,`vat_charge` varchar(255)
 ,`net_amount` int(11)
 ,`date_order` date
-,`or_number` int(11)
+,`or_number` varchar(255)
 ,`user_name` varchar(255)
 ,`user_address` varchar(255)
 ,`user_contact_number` varchar(100)
@@ -365,6 +384,15 @@ CREATE TABLE `vw_products` (
 ,`availability` int(50)
 ,`date_sold` date
 );
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_orderlines`
+--
+DROP TABLE IF EXISTS `vw_orderlines`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_orderlines`  AS SELECT `order_lines`.`id` AS `id`, `order_lines`.`order_id` AS `order_id`, `order_lines`.`qty` AS `qty`, `order_lines`.`rate` AS `rate`, `order_lines`.`discount` AS `discount`, `order_lines`.`amount` AS `amount`, `orders`.`invoice_number` AS `inv_no`, `orders`.`gross_amount` AS `gross_amt`, `orders`.`vat_charge_rate` AS `vat_rate`, `orders`.`vat_charge` AS `Vat`, `orders`.`net_amount` AS `net_amt`, `orders`.`date_order` AS `date_order`, `orders`.`or_number` AS `or_number`, `products`.`name` AS `product_name`, `products`.`price` AS `selling_price`, `products`.`discount` AS `discount_price`, `products`.`purchased_price` AS `purchased_price` FROM ((`order_lines` left join `orders` on(`orders`.`id` = `order_lines`.`order_id`)) left join `products` on(`products`.`product_id` = `order_lines`.`product_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -530,13 +558,13 @@ ALTER TABLE `models`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `order_lines`
 --
 ALTER TABLE `order_lines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -560,7 +588,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

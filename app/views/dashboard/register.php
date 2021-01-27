@@ -40,29 +40,62 @@
     <p class="login-box-msg">Create your account. It's free and only takes a minute.</p>
 
     
-
     <?php if(!empty($errors)) {
       echo $errors;
     } ?>
 
-    <form action="<?php echo URLROOT; ?>/auth/login_success" method="post">
+    <form action="<?php echo URLROOT; ?>/auth/register" method="post">
+    
+    <p class="text-danger ml-4">
+						<?php
+							if(isset($data['name-err']))
+							echo $data['name-err'];
+						?>
+    </p>
     <div class="form-group has-feedback">
         <input type="text" class="form-control" name="name" id="name" placeholder="Username" autocomplete="off">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
 
+      <p class="text-danger ml-4">
+						<?php
+							if(isset($data['email-err']))
+							echo $data['email-err'];
+						?>
+					</p>
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" id="email" placeholder="Email" autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      
+					<p class="text-danger ml-4">
+						<?php
+							if(isset($data['password-err']))
+							echo $data['password-err'];
+						?>
+					</p>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      
+					<p class="text-danger ml-4">
+						<?php
+							if(isset($data['address-err']))
+							echo $data['address-err'];
+						?>
+					</p>
       <div class="form-group has-feedback">
         <textarea name="address" class="form-control" id="address" placeholder="Address"></textarea>
         <span class="glyphicon glyphicon-list-alt form-control-feedback"></span>
       </div>
+      
+					<p class="text-danger ml-4">
+						<?php
+							if(isset($data['contact-err']))
+							echo $data['contact-err'];
+						?>
+					</p>
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Contact Number" autocomplete="off">
         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>

@@ -51,6 +51,20 @@ class Database
         }
     }
 
+    
+    public function columnFilter($table, $column, $value) 
+    {
+        // $sql = 'SELECT * FROM ' . $table . ' WHERE `' . $column . '` = :value';
+        $sql = 'SELECT * FROM ' . $table . ' WHERE `' . str_replace('`', '', $column) . '` = :value';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':value', $value);
+        $success = $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return ($success) ? $row : [];
+        
+    }
+    
+
         public function readAll($table)
         {
             $sql = 'SELECT * FROM ' .$table;
@@ -104,6 +118,15 @@ class Database
         return ($success) ? $row : [];
     }
 
+    public function getOrderById($table,$id)
+    {
+        $sql = 'SELECT * FROM ' . $table . ' WHERE `order_id`= :order_id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':order_id',$id);
+        $success = $stmt->execute();
+        $row = $stmt->fetch();
+        return ($success) ? $row : [];
+    }
 
 	public function getActiveProductData()
 	{
