@@ -160,7 +160,7 @@ class ProductsModel
             "name" => $this->getName(),
             "price" => $this->getPrice(),
             "qty" => $this->getQty(),
-            "discount%" => $this->getDiscount(),
+            "discount" => $this->getDiscount(),
             "date_received" => $this->getdateReceived(),
             "brand_id" => $this->getBrandId(),
             "model_id" => $this->getModelId(),

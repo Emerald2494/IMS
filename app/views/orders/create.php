@@ -80,7 +80,7 @@
                    <tbody>
                      <tr id="row_1">
                        <td>
-                        <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product" style="width:100%;" onchange="getProductData(1)" required>
+                        <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
                           <option value=""></option>
                           <?php foreach ($data['products'] as $product) { ?>
                           <?php if($product['availability']==1) { ?>

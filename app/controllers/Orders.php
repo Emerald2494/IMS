@@ -44,7 +44,7 @@ class Orders extends Controller
             $vat_charge = $_POST['vat_charge_value'];
             $net_amount = $_POST['net_amount_value'];
             $date_order = date('Y-m-d');    
-            $products = $_POST['product'];
+           
            
            
             $orders = new OrdersModel();
@@ -57,7 +57,8 @@ class Orders extends Controller
             $orders->setDateOrder($date_order);
           
             $orderCreated = $this->db->create('orders',$orders->toArray());
-            $order_id = '9';
+            $order_id = '11';
+            $products = $_POST['product'];
             $count_product = count($products);
             
             for($x = 0; $x < $count_product; $x++) {
@@ -69,12 +70,13 @@ class Orders extends Controller
                     'discount' => $_POST['discount_value'][$x],
                     'amount' => $_POST['amount_value'][$x],
                 );
+                // print_r($items);
                 
-                    $isOrderDetailsCreated = $this->db->create('orders',$items);
+                 $isOrderDetailsCreated = $this->db->create('order_lines',$items);
                     
                 
             }
-            exit;
+            
             // print_r($order_id);
             
             // redirect('orders');

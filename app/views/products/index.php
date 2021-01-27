@@ -42,7 +42,7 @@
                   <th>Date Received</th>
                   <th>Price</th>
                   <th>Qty</th>
-                  
+                  <th>Discount %</th>
                   <th>Store</th>
                   <th>Date Sold</th>
                 
@@ -61,6 +61,7 @@
                         
                         <td><?php echo $product['price']; ?> </td>
                         <td><?php echo $product['qty']; ?> </td>
+                        <td><?php echo $product['discount']; ?></td>
                         <td><?php echo $product['store_name']; ?> </td>
                         <td><?php echo $product['date_sold']; ?> </td>
                        

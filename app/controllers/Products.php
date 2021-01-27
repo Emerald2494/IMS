@@ -44,6 +44,7 @@ class Products extends Controller
                 $name = $_POST['product_name'];
                 $price = $_POST['price'];
                 $qty = $_POST['qty'];
+                $discount = $_POST['discount'];
                 $date_received = $_POST['date_received'];
                 $brand_id = $_POST['brand'];
                 $model_id = $_POST['model'];
@@ -59,6 +60,7 @@ class Products extends Controller
                 $products -> setName($name);
                 $products -> setPrice( $price);
                 $products -> setQty($qty);
+                $products -> setDiscount($discount);
                 $products -> setdateReceived($date_received);
                 $products -> setBrandId($brand_id);
                 $products -> setModelId($model_id);
@@ -69,7 +71,7 @@ class Products extends Controller
                 $products -> setDateSold($date_sold);
                 $productCreated = $this->db->create('products',$products->toArray());
                 setMessage('success','Added new product');
-                redirect('products');
+                // redirect('products');
             }
             
             

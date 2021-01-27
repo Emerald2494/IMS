@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2021 at 05:34 AM
+-- Generation Time: Jan 27, 2021 at 06:13 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.25
 
@@ -191,7 +191,18 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `invoice_number`, `gross_amount`, `vat_charge_rate`, `vat_charge`, `net_amount`, `date_order`, `or_number`, `user_id`) VALUES
 (7, 0, 945000, '', '8500', 144500, '2021-01-27', 0, 0),
 (8, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
-(9, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0);
+(9, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
+(10, 0, 1081000, '', '17000', 289000, '2021-01-27', 0, 0),
+(11, 0, 1978000, '', '80900', 1698900, '2021-01-27', 0, 0),
+(12, 0, 2043000, '', '80900', 1698900, '2021-01-27', 0, 0),
+(13, 0, 1659000, '', '50000', 900000, '2021-01-27', 0, 0),
+(14, 0, 1506000, '', '17000', 289000, '2021-01-27', 0, 0),
+(15, 0, 425000, '', '25000', 450000, '2021-01-27', 0, 0),
+(16, 0, 425000, '', '25000', 450000, '2021-01-27', 0, 0),
+(17, 0, 605000, '', '10000', 190000, '2021-01-27', 0, 0),
+(18, 0, 452000, '', '17000', 289000, '2021-01-27', 0, 0),
+(19, 0, 724000, '', '34000', 578000, '2021-01-27', 0, 0),
+(20, 0, 1506000, '', '17000', 289000, '2021-01-27', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -209,6 +220,17 @@ CREATE TABLE `order_lines` (
   `amount` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `order_lines`
+--
+
+INSERT INTO `order_lines` (`id`, `order_id`, `product_id`, `qty`, `rate`, `discount`, `amount`) VALUES
+(7, 10, 4, '1', '809000', '0', '809000.00'),
+(8, 11, 7, '2', '809000', '0', '1618000.00'),
+(9, 11, 3, '1', '500000', '15', '425000.00'),
+(10, 11, 5, '1', '809000', '0', '809000.00'),
+(11, 11, 4, '-28', '170000', '20', '272000.00');
+
 -- --------------------------------------------------------
 
 --
@@ -222,7 +244,7 @@ CREATE TABLE `products` (
   `price` int(25) NOT NULL,
   `purchased_price` int(11) NOT NULL,
   `qty` int(25) NOT NULL,
-  `discount` int(25) NOT NULL,
+  `discount` int(25) DEFAULT NULL,
   `date_received` date NOT NULL,
   `brand_id` int(25) NOT NULL,
   `model_id` int(25) NOT NULL,
@@ -239,9 +261,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `img`, `name`, `price`, `purchased_price`, `qty`, `discount`, `date_received`, `brand_id`, `model_id`, `category_id`, `store_id`, `description`, `availability`, `date_sold`, `customer_id`) VALUES
-(3, '', 'Testing Product', 500000, 0, 12, 0, '2021-01-21', 21, 1, 14, 13, '                       this is description                                                                                          ', 2, '0000-00-00', 0),
+(3, '', 'Testing Product', 500000, 0, 12, 15, '2021-01-21', 21, 1, 14, 13, '                         this is description                                                                                                                              ', 1, '0000-00-00', 0),
 (4, '', 'Lenovo 100e', 170000, 0, 10, 20, '2021-01-21', 35, 8, 13, 10, '                 Specs: CPU Intel celeron N3350; 1366*768,standby 6-7 hours;                               ', 1, '0000-00-00', 0),
-(5, '', 'Huawei MateBook D15', 809000, 0, 10, 0, '2021-01-22', 34, 3, 13, 13, '                   15.6-inch HUAWEI FullView Display\r\n\r\n', 1, '0000-00-00', 0);
+(5, '', 'Huawei MateBook D15', 809000, 0, 10, 0, '2021-01-22', 34, 3, 13, 13, '                   15.6-inch HUAWEI FullView Display\r\n\r\n', 1, '0000-00-00', 0),
+(7, '', 'Product A', 200000, 0, 10, 10, '2021-01-21', 21, 3, 13, 10, '                  ', 1, '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -332,6 +355,7 @@ CREATE TABLE `vw_products` (
 ,`price` int(25)
 ,`purchased_price` int(11)
 ,`qty` int(25)
+,`discount` int(25)
 ,`date_received` date
 ,`brand_name` varchar(255)
 ,`model_name` varchar(255)
@@ -358,7 +382,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_products`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_products`  AS SELECT `products`.`product_id` AS `product_id`, `products`.`img` AS `img`, `products`.`name` AS `name`, `products`.`price` AS `price`, `products`.`purchased_price` AS `purchased_price`, `products`.`qty` AS `qty`, `products`.`date_received` AS `date_received`, `brands`.`name` AS `brand_name`, `models`.`name` AS `model_name`, `categories`.`name` AS `category_name`, `stores`.`name` AS `store_name`, `products`.`description` AS `description`, `products`.`availability` AS `availability`, `products`.`date_sold` AS `date_sold` FROM ((((`products` left join `brands` on(`brands`.`id` = `products`.`brand_id`)) left join `models` on(`products`.`model_id` = `models`.`id`)) left join `categories` on(`categories`.`id` = `products`.`category_id`)) left join `stores` on(`stores`.`id` = `products`.`store_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_products`  AS SELECT `products`.`product_id` AS `product_id`, `products`.`img` AS `img`, `products`.`name` AS `name`, `products`.`price` AS `price`, `products`.`purchased_price` AS `purchased_price`, `products`.`qty` AS `qty`, `products`.`discount` AS `discount`, `products`.`date_received` AS `date_received`, `brands`.`name` AS `brand_name`, `models`.`name` AS `model_name`, `categories`.`name` AS `category_name`, `stores`.`name` AS `store_name`, `products`.`description` AS `description`, `products`.`availability` AS `availability`, `products`.`date_sold` AS `date_sold` FROM ((((`products` left join `brands` on(`brands`.`id` = `products`.`brand_id`)) left join `models` on(`products`.`model_id` = `models`.`id`)) left join `categories` on(`categories`.`id` = `products`.`category_id`)) left join `stores` on(`stores`.`id` = `products`.`store_id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -506,19 +530,19 @@ ALTER TABLE `models`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `order_lines`
 --
 ALTER TABLE `order_lines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `stores`
