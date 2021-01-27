@@ -58,6 +58,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="discount">Discount</label>
+                  <input type="number" class="form-control" id="discount" name="discount" placeholder="Enter Discount" autocomplete="off" />
+                </div>
+
+                <div class="form-group">
                   <label for="date_received">Date Received</label>
                   <input type="date" class="form-control" id="date_received" name="date_received" placeholder="Enter Qty" autocomplete="off" />
                 </div>

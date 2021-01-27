@@ -6,7 +6,10 @@ class Orders extends Controller
     public function __construct() {
         $this->db = new Database();
         $this->model('OrdersModel');
+        $this->model('OrderLinesModel');
         $this->data['page_title'] = 'Order';
+
+        
     }
     
     public function index()
@@ -34,26 +37,60 @@ class Orders extends Controller
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             //for order store
-            $or_no = $_POST['or_number'];
-            $customer_id = $_POST['customer_name'];
-            $inv_no = $_POST['inv_no'];
-            $total_price = $_POST['total_price'];
-            $date_order = $_POST['date_order'];
-            $product_id = $_POST['product'];
-            $discount = $_POST['discount'];
-            
-            $orders = new ordersModel();
+            $or_no = 'OR -'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+            $inv_no = 'INV/'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+            $gross_amount = $_POST['gross_amount_value'];
+            $vat_charge_rate = $_POST['service_charge_rate'];
+            $vat_charge = $_POST['vat_charge_value'];
+            $net_amount = $_POST['net_amount_value'];
+            $date_order = date('Y-m-d');    
+            $products = $_POST['product'];
+           
+           
+            $orders = new OrdersModel();
             $orders->setOrNumber($or_no);
-            $orders->setCustomerId($customer_id);
             $orders->setInvoiceNo($inv_no);
-            $orders->setTotalPrice($total_price);
+            $orders->setGrossAmount($gross_amount);
+            $orders->setVatChargeRate($vat_charge_rate);
+            $orders->setVatCharge($vat_charge);
+            $orders->setNetAmount($net_amount);
             $orders->setDateOrder($date_order);
-            $orders->setProductId($product_id);
-            $expenses = $this->db->create('orders',$orders->toArray());
-
+          
+            $orderCreated = $this->db->create('orders',$orders->toArray());
+            $order_id = '9';
+            $count_product = count($products);
+            
+            for($x = 0; $x < $count_product; $x++) {
+                $items = array(
+                    'order_id' => $order_id,
+                    'product_id' => $_POST['product'][$x],
+                    'qty' => $_POST['qty'][$x],
+                    'rate' => $_POST['rate_value'][$x],
+                    'discount' => $_POST['discount_value'][$x],
+                    'amount' => $_POST['amount_value'][$x],
+                );
+                
+                    $isOrderDetailsCreated = $this->db->create('orders',$items);
+                    
+                
+            }
+            exit;
+            // print_r($order_id);
+            
+            // redirect('orders');
+            
+            // $or_no = 'OR -'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+            // $inv_no = 'INV/'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+            // $data = array(
+            //     'or_no' => $or_no,
+            //     'inv_no' => $inv_no,
+            //     'product_id' =>$_POST('product'),
+            // );
+            // print_r($data);
+            // $orderCreated = $this->db->create('orders',$data);
             
         }
-          redirect('brands');
+          
     }
 
 

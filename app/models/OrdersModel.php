@@ -2,42 +2,26 @@
 
 class OrdersModel
 {
-    private $order_id;
-    private $customer_id;
-    private $emp_id;
+    private $id;
     private $invoice_number;
-    private $total_price;
+    private $gross_amount;
+    private $vat_charge_rate;
+    private $vat_charge;
+    private $net_amount;
     private $date_order;
-    private $qty;
     private $or_number;
-    private $product_id;
-    
-    public function serOrderId($id)
+
+
+    public function setId($id)
     {
-        $this->order_id = $order_id;
+        $this->id = $id;
     }
-    public function getOrderId()
+    public function getId()
     {
-        return $this->order_id;
+        return $this->id;
     }
 
-    public function setCustomerId($customer_id)
-    {
-        $this->customer_id = $customer_id;
-    }
-    public function getCustomerId()
-    {
-        return $this->customer_id;
-    }
-
-    public function setEmpId($emp_id)
-    {
-        $this->emp_id = $emp_id;
-    }
-    public function getEmpId()
-    {
-        return $this->emp_id;
-    }
+  
 
     public function setInvoiceNo($invoice_number)
     {
@@ -48,15 +32,42 @@ class OrdersModel
         return $this->invoice_number;
     }
 
-    public function setTotalPrice($total_price)
+    public function setGrossAmount($gross_amount)
     {
-        $this->total_price = $total_price;
+        $this->gross_amount = $gross_amount;
     }
-    public function getTotalPrice()
+    public function getGrossAmount()
     {
-        return $this->total_price;
+        return $this->gross_amount;
     }
 
+    
+    public function setVatChargeRate($vat_charge_rate)
+    {
+        $this->vat_charge_rate = $vat_charge_rate;
+    }
+    public function getVatChargeRate()
+    {
+        return $this->vat_charge_rate;
+    }
+
+    public function setVatCharge($vat_charge)
+    {
+        $this->vat_charge = $vat_charge;
+    }
+    public function getVatCharge()
+    {
+        return $this->vat_charge;
+    }
+
+    public function setNetAmount($net_amount)
+    {
+        $this->net_amount = $net_amount;
+    }
+    public function getNetAmount()
+    {
+        return $this->net_amount;
+    }
     public function setDateOrder($date_order)
     {
         $this->date_order = $date_order;
@@ -65,16 +76,6 @@ class OrdersModel
     {
         return $this->date_order;
     }
-
-    public function setQty($qty)
-    {
-        $this->qty = $qty;
-    }
-    public function getQty()
-    {
-        return $this->qty;
-    }
-
     public function setOrNumber($or_number)
     {
         $this->or_number = $or_number;
@@ -84,27 +85,19 @@ class OrdersModel
         return $this->or_number;
     }
 
-    public function setProductId($product_id)
-    {
-        $this->product_id = $product_id;
-    }
-    public function getProductId()
-    {
-        return $this->product_id;
-    }
 
     public function toArray()
     {
         return [
-            "order_id" => $this->getOrderId(),
-            "customer_id" => $this->getCustomerId(),
-            "emp_id" => $this->getEmpId(),
+            "id" => $this->getId(),
             "invoice_number" => $this->getInvoiceNo(),
-            "total_price" => $this->getTotalPrice(),
+            "gross_amount" => $this->getGrossAmount(),
+            "vat_charge_rate" => $this->getVatChargeRate(),
+            "vat_charge" => $this->getVatCharge(),
+            "net_amount" => $this->getNetAmount(),
             "date_order" => $this->getDateOrder(),
-            "qty" => $this->getQty(),
             "or_number" => $this->getOrNumber(),
-            "product_id" => $this->getProductId(),
+         
         ];
     }
 }

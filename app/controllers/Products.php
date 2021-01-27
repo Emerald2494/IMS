@@ -112,6 +112,7 @@ class Products extends Controller
                 $name = $_POST['product_name'];
                 $price = $_POST['price'];
                 $qty = $_POST['qty'];
+                $discount = $_POST['discount'];
                 $date_received = $_POST['date_received'];
                 $brand_id = $_POST['brand'];
                 $model_id = $_POST['model'];
@@ -127,6 +128,7 @@ class Products extends Controller
                 $products -> setName($name);
                 $products -> setPrice( $price);
                 $products -> setQty($qty);
+                $products -> setDiscount($discount);
                 $products -> setdateReceived($date_received);
                 $products -> setBrandId($brand_id);
                 $products -> setModelId($model_id);
@@ -138,7 +140,7 @@ class Products extends Controller
                         
                 $productCreated = $this->db->productUpdate('products',$products->getProductId(),$products->toArray());
                
-                redirect('products');
+                // redirect('products');
             }else{
                 echo 'try again';
            

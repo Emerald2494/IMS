@@ -16,6 +16,7 @@ class ProductsModel
     private $availability;
     private $date_sold;
     private $customer_id;
+    private $discount;
     
     public function setProductId($product_id)
     {
@@ -60,6 +61,14 @@ class ProductsModel
     public function getQty()
     {
         return $this->qty;
+    }
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 
     public function setDateReceived($date_received)
@@ -151,6 +160,7 @@ class ProductsModel
             "name" => $this->getName(),
             "price" => $this->getPrice(),
             "qty" => $this->getQty(),
+            "discount%" => $this->getDiscount(),
             "date_received" => $this->getdateReceived(),
             "brand_id" => $this->getBrandId(),
             "model_id" => $this->getModelId(),

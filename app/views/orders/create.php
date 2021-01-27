@@ -29,7 +29,7 @@
             <h3 class="box-title">Add Order</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" action="" method="post" class="form-horizontal">
+          <form role="form" action="<?php echo URLROOT;?>/orders/store" method="post" class="form-horizontal">
               <div class="box-body">
 
                 <div class="form-group">
@@ -71,6 +71,7 @@
                       <th style="width:50%">Product</th>
                       <th style="width:10%">Qty</th>
                       <th style="width:10%">Rate</th>
+                      <th style="width:10%">Discount%</th>
                       <th style="width:20%">Amount</th>
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default add_row"><i class="fa fa-plus"></i></button></th>
                     </tr>
@@ -96,6 +97,10 @@
                           <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
                         </td>
                         <td>
+                          <input type="text" name="discount[]" id="discount_1" class="form-control" disabled autocomplete="off">
+                          <input type="hidden" name="discount_value[]" id="discount_value_1" class="form-control" autocomplete="off">
+                        </td>
+                        <td>
                           <input type="text" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="amount_value[]" id="amount_value_1" class="form-control" autocomplete="off">
                         </td>
@@ -109,7 +114,7 @@
                 <div class="col-md-6 col-xs-12 pull pull-right">
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label">Total Amount</label>
+                    <label for="gross_amount" class="col-sm-5 control-label">Gross Amount</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="gross_amount" name="gross_amount" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off">
@@ -117,9 +122,10 @@
                   </div>
                   
                   <div class="form-group">
-                    <label for="discount" class="col-sm-5 control-label">Discount</label>
+                    <label for="vat" class="col-sm-5 control-label">VAT 5%</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" onkeyup="subAmount()" autocomplete="off">
+                      <input type="text" class="form-control" id="vat_charge" name="vat_charge" placeholder="VAT" onkeyup="subAmount()" autocomplete="off">
+                      <input type="hidden" class="form-control" id="vat_charge_value" name="vat_charge_value" autocomplete="off">
                     </div>
                   </div>
                   <div class="form-group">
@@ -136,7 +142,7 @@
 
               <div class="box-footer">
                 <input type="hidden" name="service_charge_rate" value="" autocomplete="off">
-                <input type="hidden" name="vat_charge_rate" value="" autocomplete="off">
+                <input type="hidden" name="vat_charge_rate" value="5" autocomplete="off">
                 <button type="submit" class="btn btn-primary">Create Order</button>
                 <a href="" class="btn btn-warning">Back</a>
               </div>
@@ -191,7 +197,7 @@ $('#add_row').unbind('click').bind('click', function() {
                     '<select class="form-control select_group product" data-row-id="'+row_id+'" id="product_'+row_id+'" name="product[]" style="width:100%;" onchange="getProductData('+row_id+')">'+
                         '<option value=""></option>';
                         $.each(response, function(index, value) {
-                            html += '<option value="'+value.id+'">'+value.name+'</option>';             
+                            html += '<option value="'+value.product_id+'">'+value.name+'</option>';             
                         });
                         
                         // html += '<option value="'+response.id+'">'+response.name+'</option>'; 
@@ -199,6 +205,7 @@ $('#add_row').unbind('click').bind('click', function() {
                     '</td>'+ 
                     '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onkeyup="getTotal('+row_id+')"></td>'+
                     '<td><input type="text" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
+                    '<td><input type="text" name="discount[]" id="discount_'+row_id+'" class="form-control" disabled><input type="hidden" name="discount_value[]" id="discount_value_'+row_id+'" class="form-control"></td>'+
                     '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
                     '<td><button type="button" class="btn btn-default" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
                     '</tr>';
@@ -221,11 +228,23 @@ $('#add_row').unbind('click').bind('click', function() {
 
     function getTotal(row = null) {
         if(row) {
-        var total = Number($("#rate_value_"+row).val()) * Number($("#qty_"+row).val());
+        var rate = $('#rate_value_'+row).val();
+        var discount = $('#discount_value_'+row).val();
+        var discount_price =Number(rate) * Number(discount)/100 * Number($("#qty_"+row).val());
+        // alert(discount_price);
+        var total = Number($("#rate_value_"+row).val()) * Number($("#qty_"+row).val()) - Number(discount_price);
         total = total.toFixed(2);
         $("#amount_"+row).val(total);
         $("#amount_value_"+row).val(total);
-        
+        var rate = $('#rate_value_'+row).val();
+        var vat = 0.05;
+        var vat_charge = Number(rate) * Number(vat) * Number($("#qty_"+row).val());
+        $("#vat_charge").val(vat_charge);
+        $("#vat_charge_value").val(vat_charge);
+        var grandTotal = Number(total) + Number(vat_charge);
+          grandTotal = grandTotal.toFixed(2);
+          $("#net_amount").val(grandTotal);
+          $("#net_amount_value").val(grandTotal);
         subAmount();
 
         } else {
@@ -241,7 +260,8 @@ $('#add_row').unbind('click').bind('click', function() {
     if(product_id == "") {
       $("#rate_"+row_id).val("");
       $("#rate_value_"+row_id).val("");
-
+      $("#discount_"+row_id).val("");
+      $("#discount_value_"+row_id).val("");
       $("#qty_"+row_id).val("");           
 
       $("#amount_"+row_id).val("");
@@ -261,15 +281,31 @@ $('#add_row').unbind('click').bind('click', function() {
           $("#rate_"+row_id).val(response.price);
           $("#rate_value_"+row_id).val(response.price);
 
+          $("#discount_"+row_id).val(response.discount);
+          $("#discount_value_"+row_id).val(response.discount);
+
           $("#qty_"+row_id).val(1);
           $("#qty_value_"+row_id).val(1);
           var qty = $("#qty_"+row_id).val();
-          var total = Number(response.price) * Number(qty);
+          var discount = $('#discount_'+row_id).val();
+          var rate = $('#rate_'+row_id).val();
+          
+          var discount_price =Number(rate) * Number(discount)/100;
+          // alert(discount_price);
+          var total = Number(response.price) * Number(qty) - Number(discount_price);
           total = total.toFixed(2);
           $("#amount_"+row_id).val(total);
           $("#amount_value_"+row_id).val(total);
-          
-          
+         
+          var vat = 0.05;
+            var vat_charge = Number(rate) * Number(vat) * Number(qty);;
+            $("#vat_charge").val(vat_charge);
+          $("#vat_charge_value").val(vat_charge);
+            var grandTotal = Number(total) + Number(vat_charge);
+              grandTotal = grandTotal.toFixed(2);
+              $("#net_amount").val(grandTotal);
+              $("#net_amount_value").val(grandTotal);
+              
           subAmount();
         } // /success
       }); // /ajax function to fetch the product data 
@@ -305,18 +341,8 @@ $('#add_row').unbind('click').bind('click', function() {
             totalAmount = totalAmount.toFixed(2);
             // $("#net_amount").val(totalAmount);
             // $("#totalAmountValue").val(totalAmount);
-
-            var discount = $("#discount").val();
-            if(discount) {
-              var grandTotal = Number(totalAmount) - Number(discount);
-              grandTotal = grandTotal.toFixed(2);
-              $("#net_amount").val(grandTotal);
-              $("#net_amount_value").val(grandTotal);
-            } else {
-              $("#net_amount").val(totalAmount);
-              $("#net_amount_value").val(totalAmount);
-              
-            } // /else discount 
+           
+          
 
 
         } // /sub total amount
