@@ -14,7 +14,14 @@ class Dashboard extends Controller
     }
     public function home()
     {
-        $this->view('dashboard/index');
+        
+        $products = $this->db->ProductCount();
+        $orders = $this->db->OrderCount();
+        $data = [
+            "products" => $products,
+            "orders" => $orders,
+        ];
+        $this->view('dashboard/index',$data);
     }
 
     public function register()
@@ -25,6 +32,14 @@ class Dashboard extends Controller
     public function login()
     {
         $this->view('dashboard/login');
+    }
+    public function ProductCount()
+    {
+        $products=$this->db->readAll('vw_products');
+        $data = [
+            "products" => $products,
+        ];
+        $this->view('dashboard/ProductCount',$data);
     }
    
 }

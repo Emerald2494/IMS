@@ -12,6 +12,17 @@ class Auth extends Controller
 
     }
 
+    public function formRegister(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email_check']) && $_POST['email_check'] == 1) {
+
+			
+            $email = $_POST['email'];
+            $isUserExist = $this->db->columnFilter('users','email',$email);
+            if($isUserExist) {
+				echo "Sorry! email has already taken. Please try another.";
+			}
+		}
+    }
     
     public function register()
     {

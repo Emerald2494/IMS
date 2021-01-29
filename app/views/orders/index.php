@@ -37,8 +37,8 @@
               <thead>
               <tr>
                 <th>Customer Name</th>
-                <th>Customer Address</th>
-                <th>Customer Contact_Number</th>
+                <th> Address</th>
+                <th> Contact_Number</th>
                 <th>OR Number</th>
                 <th>Invoice Number</th>
                 <th>Date</th>
@@ -46,7 +46,7 @@
                 <th>Vat Charge</th>
                 <th>Net Amount</th>
                 
-                  <th>Action</th>
+                  <th class="text-center">Action</th>
               </tr>
               </thead>
               <tbody>
@@ -63,9 +63,7 @@
                         <td><?php echo $order['net_amount']; ?> </td>
                      
                        
-                        <td><a href="<?php echo URLROOT;?>/orders/viewOrderLines/<?php echo $order['id']; ?>" type="button" class="btn btn-default" > <i class="fa fa-eye" aria-hidden="true"></i></a> | <a href="<?php echo URLROOT;?>/orders/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit"><i class="fa fa-pencil"></i></a> |
-                            
-                        <a href="<?php echo URLROOT;?>/orders/removeOrders/<?php echo $order['id']; ?>" type="button" class="btn btn-default" ><i class="fa fa-trash"></i></a></td>
+                        <td><a href="<?php echo URLROOT;?>/orders/viewOrderLines/<?php echo $order['id']; ?>" type="button" class="btn btn-default" > <i class="fa fa-eye" aria-hidden="true"></i></a></td>
                       
                         
                     </tr>

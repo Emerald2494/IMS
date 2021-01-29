@@ -26,14 +26,16 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
               <div class="inner">
-               
-                <h3>100</h3>
+               <?php foreach($data['products'] as $product){ ?>
+                <h3><?php echo $product['NumberOfProducts'];?></h3>
+               <?php } ?>
+                
                 <p>Total Products</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo URLROOT;?>/dashboard/ProductCount" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -41,14 +43,17 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <h3>20</h3>
+              <?php foreach($data['orders'] as $order){ ?>
+                <h3><?php echo $order['NumberOfOrders'];?></h3>
+               <?php } ?>
+                
 
-                <p>Total Paid Orders</p>
+                <p>Total Orders</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo URLROOT;?>/orders/index" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -58,7 +63,7 @@
               <div class="inner">
                 <h3>2</h3>
 
-                <p>Total Users</p>
+                <p>Daily Sale</p>
               </div>
               <div class="icon">
                 <i class="ion ion-android-people"></i>
@@ -73,10 +78,10 @@
               <div class="inner">
                 <h3>5</h3>
 
-                <p>Total Stores</p>
+                <p>Weekly Sale</p>
               </div>
               <div class="icon">
-                <i class="ion ion-android-home"></i>
+              <i class="fa fa-chart-bar"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>

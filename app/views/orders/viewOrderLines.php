@@ -44,11 +44,16 @@
                 <th>Discount % </th>
                 <th>Amount</th>
                 
-                  <th>Action</th>
+                
               </tr>
               </thead>
               <tbody>
-                <?php foreach($data['orders'] as $order) { ?>
+             
+
+              
+                <?php foreach($data['vworders'] as $order) { ?>
+                <?php if($data['orders']['id'] == $order['order_id']){?>
+                  
                     <tr>
                         <td><?php echo $order['or_number']; ?> </td>
                         <td><?php echo $order['product_name']; ?> </td>
@@ -56,24 +61,20 @@
                         <td><?php echo $order['rate']; ?> </td>
                         <td><?php echo $order['discount']; ?> </td>
                         <td><?php echo $order['amount'];?></td>
-                    
-                     
-                       
-                        <td><a href="<?php echo URLROOT;?>/orders/edit/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default edit"><i class="fa fa-pencil"></i></a> |
-                            
-                        <a href="<?php echo URLROOT; ?>/products/removeProducts/<?php echo $product['product_id']; ?>" type="button" class="btn btn-default" ><i class="fa fa-trash"></i></a></td>
-                      
-                        
                     </tr>
-                  
+                    
                   <?php } ?>
-            
+               <?php }  ?>
+             
             </tbody>
+                  
             </table>
           </div>
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
+        <a href="<?php echo URLROOT;?>/orders" class="btn btn-primary"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back
+</a>
       </div>
       <!-- col-md-12 -->
     </div>

@@ -26,16 +26,35 @@ class UserValidator
  }
 
  private function validateUserName()
- {
-  $val = trim($this->data['name']);
-  if (empty($val)) {
-   $this->addError('name-err', 'User name can not be empty !');
-  } else {
-   if (!preg_match('/^[a-zA-Z0-0]{6,25}$/', $val)) {
-    $this->addError('name-err', 'User name must be 6 to 25 chars & alphabatic !');
-   }
-  }
- }
+    {
+        $val = trim($this->data['name']);
+
+        $uppercase    = preg_match('@[A-Z]@', $val);
+        $lowercase    = preg_match('@[a-z]@', $val);
+        $length = preg_match('/^[a-zA-Z0-0]{6,25}$/', $val);
+        if (empty($val)) {
+            $this->addError('name-err', 'User name can not be empty !');
+        } else {
+            if (!$uppercase || !$lowercase || !$length) {
+                $this->addError('name-err', 'User name must be 6 to 25 chars & alphabatic !');
+            }
+        }
+    }
+
+
+//  private function validateUserName()
+//  {
+//   $val = trim($this->data['name']);
+//   print_r($val);
+//   exit;
+//   if (empty($val)) {
+//    $this->addError('name-err', 'User name can not be empty !');
+//   } else {
+//    if (!preg_match('/^[a-zA-Z0-0]{6,25}$/', $val)) {
+//     $this->addError('name-err', 'User name must be 6 to 25 chars & alphabatic !');
+//    }
+//   }
+//  }
 
  private function validateEmail()
  {

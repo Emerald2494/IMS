@@ -118,6 +118,7 @@ class Database
         return ($success) ? $row : [];
     }
 
+
     public function getOrderById($table,$id)
     {
         $sql = 'SELECT * FROM ' . $table . ' WHERE `order_id`= :order_id';
@@ -195,6 +196,26 @@ class Database
         //print_r( $user_row);
         return ($login_success) ? $user_row : [];
    
+    }
+
+    public function ProductCount()
+    {
+        $sql = 'SELECT COUNT(`product_id`) AS NumberOfProducts FROM `products` WHERE `availability` = 1';
+    
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':availability',1);
+        $success = $stmt->execute();
+        $row = $stmt->fetchAll();
+        return ($success) ? $row : [];
+    }
+
+    public function OrderCount()
+    {
+        $sql = 'SELECT COUNT(`id`) AS NumberOfOrders FROM `orders`';
+        $stmt = $this->pdo->prepare($sql);
+        $success = $stmt->execute();
+        $row = $stmt->fetchAll();
+        return ($success) ? $row : [];
     }
 
 }

@@ -44,7 +44,7 @@
       echo $errors;
     } ?>
 
-    <form action="<?php echo URLROOT; ?>/auth/register" method="post">
+    <form action="<?php echo URLROOT; ?>/auth/register" name="contactForm" method="post">
     
     <p class="text-danger ml-4">
 						<?php
@@ -131,7 +131,7 @@
 <script src="<?php echo URLROOT;?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo URLROOT;?>/plugins/iCheck/icheck.min.js"></script>
-<script>
+<script type="text/javascript">
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -139,6 +139,211 @@
       increaseArea: '20%' // optional
     });
   });
+  
+
+$(function () {
+
+var str=$('name').val();
+if(/^[a-zA-Z- ]*$/.test(str) == false) {
+		alert('Your search string contains illegal characters.');
+	}
+$("form[name='contactForm']").validate({
+	// Define validation rules
+	rules: {
+		name: "required",
+		email: "required",
+		password: "required",
+		
+		name: {
+			required: true,
+			minlength: 6,
+			maxlength: 20,
+
+		},
+		email: {
+			required: true,
+			minlength: 6,
+			maxlength: 50,
+			email: true
+		},
+		password: {
+			minlength: 8,
+			maxlength: 30,
+			required: true,
+			//pwcheck: true,
+			// checklower: true,
+			// checkupper: true,
+			// checkdigit: true
+		},
+		
+	},
+	// Specify validation error messages
+	messages: {
+		required: "Please enter your name",
+		minlength: "Name must be min 6 characters long",
+
+		
+		email: {
+			required: "Please enter your email",
+			minlength: "Please enter a valid email address",
+		},
+		password: {
+			required: "Please enter your password",
+			minlength: "Password length must be min 8 characters long",
+			maxlength: "Password length must not be more than 30 characters long"
+		},
+		
+	},
+	submitHandler: function (form) {
+		form.submit();
+	}
+});
+}); 
+	
+$(document).ready(function() {
+
+// form autocomplete off		
+$(":input").attr('autocomplete', 'off');
+
+// remove box shadow from all text input
+$(":input").css('box-shadow', 'none');
+
+
+
+$("#name").blur(function() {
+
+var name  		= 		$('#name').val();
+
+
+// if name is empty then return
+if(name == "") {
+	return;
+}
+var form_url = '<?php echo URLROOT; ?>/auth/formRegister';
+
+// send ajax request if name is not empty
+$.ajax({
+		url:form_url,
+		type: 'post',
+		data: {
+			'name':name,
+			
+	},
+
+	success:function(response) {	
+
+		// clear span before error message
+		$("#name_error").remove();
+
+		// adding span after name textbox with error message
+		$("#name").after("<span id='name_error' class='text-danger'>"+response+"</span>");
+	},
+
+	error:function(e) {
+		$("#result").html("Something went wrong");
+	}
+
+});
+});
+
+
+// ------------------- [ Email blur function ] -----------------
+
+$("#email").blur(function() {
+
+	var email  		= 		$('#email').val();
+
+
+	// if email is empty then return
+	if(email == "") {
+		return;
+	}
+	var form_url = '<?php echo URLROOT; ?>/auth/formRegister';
+
+	// send ajax request if email is not empty
+	$.ajax({
+			url:form_url,
+			type: 'post',
+			data: {
+				'email':email,
+				'email_check':1,
+		},
+
+		success:function(response) {	
+
+			// clear span before error message
+			$("#email_error").remove();
+
+			// adding span after email textbox with error message
+			$("#email").after("<span id='email_error' class='text-danger'>"+response+"</span>");
+		},
+
+		error:function(e) {
+			$("#result").html("Something went wrong");
+		}
+
+	});
+});
+$("#passsword").blur(function() {
+
+var password  		= 		$('#password').val();
+
+
+// if password is empty then return
+if(password == "") {
+	return;
+}
+var form_url = '<?php echo URLROOT; ?>/auth/formRegister';
+
+// send ajax request if password is not empty
+$.ajax({
+		url:form_url,
+		type: 'post',
+		data: {
+			'password':password,
+			
+	},
+
+	success:function(response) {	
+
+		// clear span before error message
+		$("#password_error").remove();
+
+		// adding span after password textbox with error message
+		$("#password").after("<span id='password_error' class='text-danger'>"+response+"</span>");
+	},
+
+	error:function(e) {
+		$("#result").html("Something went wrong");
+	}
+
+});
+});
+
+
+// -----------[ Clear span after clicking on inputs] -----------
+
+$("#name").keyup(function() {
+$("#error").remove();
+});
+
+
+$("#email").keyup(function() {
+$("#error").remove();
+$("span").remove();
+});
+
+$("#password").keyup(function() {
+$("#error").remove();
+});
+
+$("#c_password").keyup(function() {
+$("#error").remove();
+});
+
+});
+
+
 </script>
 </body>
 </html>

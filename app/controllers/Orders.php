@@ -91,6 +91,7 @@ class Orders extends Controller
 
     public function removeOrders($id)
     {
+        
         $isDeleted = $this->db->delete('orders', $id);
        
          setMessage('success',"Successfully deleted.");
@@ -115,14 +116,22 @@ class Orders extends Controller
     public function viewOrderLines($id)
     {
         
-        $orders= $this->db->readAll('vw_orderlines');
-        $orderlines = $this->db->getOrderById('order_lines',$id);
+        $vworders= $this->db->readAll('vw_orderlines');
+        
+        $orders = $this->db->getById('vw_orders',$id);
+        // $orderlines = $this->db->getOrderById('order_lines',$id);
+        // print_r($orderlines);
+        // exit;
+        // print_r($orders);
+       
         $data = [
+            "vworders" => $vworders,
             "orders" => $orders,
-            "orderlines" =>$orderlines,
+            // "orderlines" =>$orderlines,
         ];
         $this->view('orders/viewOrderLines',$data);  
         
     }
+
   
 }
